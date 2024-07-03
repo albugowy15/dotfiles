@@ -1,0 +1,16 @@
+import = ["~/.config/alacritty/moonfly.toml"]
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window]
+startup_mode = "Maximized"
+dynamic_title = false
+decorations = "None"
+decorations_theme_variant = "Dark"
+
+[font]
+size = 9
+normal = { family = "GeistMono Nerd Font", style = "Medium" }
+bold = { family = "GeistMono Nerd Font", style = "Bold" }

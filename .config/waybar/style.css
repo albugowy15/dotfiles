@@ -1,0 +1,55 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "GeistMono Nerd Font";
+  font-size: 10px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: #080808;
+}
+
+tooltip {
+  background: #080808;
+  border: 1px solid #bdbdbd;
+}
+
+tooltip label {
+  color: #bdbdbd;
+}
+
+#workspaces button {
+  background-color: #323437;
+  color: #bdbdbd;
+  padding: 0 2px;
+}
+
+#workspaces button.active {
+  color: #323437;
+  background: #b2ceee;
+}
+
+#pulseaudio,
+#battery,
+#clock,
+#tray,
+#power-profiles-daemon,
+#user {
+  background-color: #323437;
+  padding: 0px 8px;
+  margin-left: 5px;
+  color: #bdbdbd;
+}
+
+#pulseaudio {
+  padding-right: 13px;
+}
+
+#taskbar {
+  margin-left: 8px;
+}
+#taskbar button {
+  background-color: #323437;
+  padding: 0px 8px;
+}
