@@ -1,15 +1,9 @@
 return {
   -- coding
-  { "hrsh7th/cmp-path", enabled = false },
-  { "hrsh7th/cmp-buffer", enabled = false },
   { "garymjr/nvim-snippets", enabled = false },
   { "rafamadriz/friendly-snippets", enabled = false },
   { "echasnovski/mini.pairs", enabled = false },
   { "echasnovski/mini.ai", enabled = false },
-
-  -- colorscheme
-  -- { "catppuccin/nvim", enabled = false },
-  -- { "folke/tokyonight.nvim", enabled = false },
 
   -- editor
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
