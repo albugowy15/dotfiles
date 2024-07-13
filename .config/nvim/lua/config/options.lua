@@ -9,6 +9,11 @@ vim.filetype.add({
 })
 vim.opt.cursorlineopt = "number"
 vim.o.background = "dark"
-vim.o.timeoutlen = 5000 -- Timoutlen to delay which key
+-- vim.o.timeoutlen = 5000 -- Timoutlen to delay which key
 vim.g.autoformat = false
+
+-- Netrw config
 vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 30
+vim.g.netrw_keepdir = 0
+vim.g.netrw_localcopydircmd = "cp -r"
