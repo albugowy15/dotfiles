@@ -63,6 +63,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(
+  vi-mode
   nvm
   starship
 )
