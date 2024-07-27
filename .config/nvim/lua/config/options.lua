@@ -7,7 +7,7 @@ vim.filetype.add({
     mdx = "mdx",
   },
 })
-vim.opt.cursorlineopt = "number"
+-- vim.opt.cursorlineopt = "number"
 vim.o.background = "dark"
 -- vim.o.timeoutlen = 5000 -- Timoutlen to delay which key
 vim.g.autoformat = false
@@ -17,3 +17,9 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 30
 vim.g.netrw_keepdir = 0
 vim.g.netrw_localcopydircmd = "cp -r"
+
+-- LSP Server to use for Python.
+-- Set to "basedpyright" to use basedpyright instead of pyright.
+vim.g.lazyvim_python_lsp = "pyright"
+-- Set to "ruff_lsp" to use the old LSP implementation version.
+vim.g.lazyvim_python_ruff = "ruff"
