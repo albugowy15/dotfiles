@@ -9,8 +9,16 @@ startup_mode = "Maximized"
 dynamic_title = false
 decorations = "None"
 decorations_theme_variant = "Dark"
+padding = { x = 4, y = 2 }
+
+[cursor]
+unfocused_hollow = true
 
 [font]
 size = 9.0
 normal = { family = "GeistMono Nerd Font", style = "Medium" }
 bold = { family = "GeistMono Nerd Font", style = "Bold" }
+offset = { x = 0, y = 0 }
+
+[mouse]
+hide_when_typing = true
