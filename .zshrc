@@ -78,5 +78,5 @@ case ":$PATH:" in
 esac
 
 # alias
-alias vim="nvim"
+alias vim="vi"
 alias cat="bat"
