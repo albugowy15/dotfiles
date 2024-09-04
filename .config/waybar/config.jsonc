@@ -2,11 +2,20 @@
 {
   "position": "top",
   "mode": "dock",
-  "exclusive": false,
   "height": 20,
+  "margin-bottom": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "spacing": 0,
   "modules-left": ["hyprland/workspaces", "wlr/taskbar"],
-  "modules-center": ["clock"],
-  "modules-right": ["tray", "pulseaudio", "power-profiles-daemon", "battery"],
+  "modules-center": ["hyprland/window", "custom/empty"],
+  "modules-right": [
+    "tray",
+    "clock",
+    "pulseaudio",
+    "power-profiles-daemon",
+    "battery",
+  ],
   "battery": {
     "states": {
       "good": 80,
@@ -49,5 +58,8 @@
   },
   "clock": {
     "format": "{:%d %b %Y - %H:%M}",
+  },
+  "hyprland/window": {
+    "format": "{initialTitle}",
   },
 }
