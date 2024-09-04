@@ -9,7 +9,6 @@ vim.filetype.add({
 })
 -- vim.opt.cursorlineopt = "number"
 vim.o.background = "dark"
--- vim.o.timeoutlen = 5000 -- Timoutlen to delay which key
 vim.g.autoformat = false
 
 -- Netrw config
