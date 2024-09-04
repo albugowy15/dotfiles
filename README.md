@@ -1,12 +1,23 @@
 # My Personal Dotfiles
 
-This repository contains all my configuration files for Arch Linux, tailored to create a seamless and efficient workflow. The configurations cover Hyprland, Neovim, Alacritty, tmux, zsh, Waybar, and more. Explore, use, and modify them according to your needs.
+Welcome to my dotfiles repository! This collection contains all my carefully crafted configuration files for **Arch Linux**, designed to create a seamless, efficient, and personalized workflow. These configurations cover a wide range of tools and applications, including:
 
-## Installation
+- Hyprland (Wayland compositor)
+- Neovim (text editor)
+- Alacritty (terminal emulator)
+- tmux (terminal multiplexer)
+- zsh (shell)
+- Waybar (status bar)
+- And more!
 
-### Prerequisites
+Feel free to explore, use, and modify these configurations according to your needs. Remember, the best dotfiles are the ones tailored to your own workflow!
 
-Make sure [GNU Stow](https://www.gnu.org/software/stow) is installed on your system. GNU Stow is a symlink farm manager that helps with managing multiple symlinks in a convenient way. It is useful for managing dotfiles, as it follows for easy deployment and updating of configuration files.
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your Arch Linux system:
+
+1. [GNU Stow](https://www.gnu.org/software/stow): A symlink farm manager that helps with managing multiple symlinks in a convenient way.
+2. Git: To clone this repository.
 
 To install GNU Stow, use the following command:
 
@@ -14,24 +25,67 @@ To install GNU Stow, use the following command:
 sudo pacman -S stow
 ```
 
-### Installation Steps
+## Installation
 
-Clone the repository into your home directory. This ensures that the paths are correctly set up for the symlinks.
+Follow these steps to set up the dotfiles on your system:
+
+1. Clone the repository into your home directory. This ensures that the paths are correctly set up for the symlinks:
 
 ```sh
-git clone https://github.com/albugowy15/dotfiles.git
+git clone https://github.com/albugowy15/dotfiles.git ~/dotfiles
 ```
 
-Use GNU Stow to create symlinks for the configuration files. This command will create symlink in the home directory that point to the files in the repository.
+2. Navigate to the dotfiles directory:
 
+```sh
+cd ~/dotfiles
 ```
+
+3. Use GNU Stow to create symlinks for the configuration files. This command will create symlinks in your home directory that point to the files in the repository:
+
+```sh
 stow .
 ```
 
-## Screenshots
+## Configuration Overview
 
-![Screenshot-2024-07-03_18:50:19](https://github.com/albugowy15/image-upload/assets/49820990/0c3db0bc-4285-4f8b-9edc-112a6864e5a4)
-![Screenshot-2024-07-03_18:48:48](https://github.com/albugowy15/image-upload/assets/49820990/34d9a4a3-f8cf-4461-92a4-c19a70a38a00)
-![Screenshot-2024-07-03_18:49:40](https://github.com/albugowy15/image-upload/assets/49820990/1dcd6efb-d83a-4776-b566-904fc3b6f385)
-![Screenshot-2024-07-03_18:49:56](https://github.com/albugowy15/image-upload/assets/49820990/2ef506b5-9cf5-4d06-9b14-a9ce7b3edd60)
-![Screenshot-2024-07-03_18:50:06](https://github.com/albugowy15/image-upload/assets/49820990/e0352eaf-e82b-47f6-86d2-926ffedcb199)
+Here's a brief overview of the main configurations included in this repository:
+
+- **Hyprland**: A dynamic tiling Wayland compositor
+- **Neovim**: A highly configurable text editor
+- **Alacritty**: A fast, cross-platform, OpenGL terminal emulator
+- **tmux**: A terminal multiplexer for managing multiple terminal sessions
+- **zsh**: An extended version of the Bourne Shell with many improvements
+- **Waybar**: A highly customizable Wayland bar for Sway and Wlroots based compositors
+
+Each tool's configuration can be found in its respective directory within this repository.
+
+## Customization
+
+Feel free to customize these configurations to suit your preferences. Here are some tips:
+
+1. Before making changes, create a backup of the original configurations.
+2. Modify the files in the `~/dotfiles` directory.
+3. After making changes, you may need to restart the respective application or log out and log back in for some changes to take effect.
+
+## Updating
+
+To update your dotfiles with the latest changes from this repository:
+
+1. Navigate to your dotfiles directory:
+
+```sh
+cd ~/dotfiles
+```
+
+2. Pull the latest changes:
+
+```sh
+git pull origin main
+```
+
+3. Re-run stow to update the symlinks:
+
+```sh
+stow .
+```
