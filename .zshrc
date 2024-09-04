@@ -66,9 +66,13 @@ plugins=(
   vi-mode
   nvm
   starship
+  fzf
 )
 
-source $ZSH/oh-my-zsh.sh
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target,.next
+  --preview 'bat -n --color=always {}'"
+export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target,.next"
 
 # pnpm
 export PNPM_HOME="/home/bughowi/.local/share/pnpm"
@@ -80,3 +84,5 @@ esac
 # alias
 alias vim="vi"
 alias cat="bat"
+
+source $ZSH/oh-my-zsh.sh
