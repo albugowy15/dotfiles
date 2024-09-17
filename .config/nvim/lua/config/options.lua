@@ -17,8 +17,11 @@ vim.filetype.add({
   },
 })
 vim.opt.cursorlineopt = "number"
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 -- vim.o.background = "dark"
 vim.g.autoformat = false
+vim.g.editorconfig = true
 vim.g.netrw_winsize = 30
 vim.g.netrw_keepdir = 0
 vim.g.netrw_localcopydircmd = "cp -r"
