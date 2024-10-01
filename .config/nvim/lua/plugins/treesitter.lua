@@ -1,4 +1,5 @@
 return {
+  "tpope/vim-sleuth",
   "nvim-treesitter/nvim-treesitter",
   opts = function(_, opts)
     if type(opts.ensure_installed) == "table" then
