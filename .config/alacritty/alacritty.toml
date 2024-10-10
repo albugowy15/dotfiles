@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/cyberdream.toml"]
+import = ["~/.config/alacritty/tokyonight_night.toml"]
 
 [window.class]
 general = "Alacritty"
