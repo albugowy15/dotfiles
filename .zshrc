@@ -81,6 +81,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/bughowi/.zsh/completions:"* ]]; then export FPATH="/home/bughowi/.zsh/completions:$FPATH"; fi
+
 # alias
 alias vim="vi"
 alias cat="bat"

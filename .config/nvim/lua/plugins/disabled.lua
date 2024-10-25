@@ -19,7 +19,7 @@ return {
   { "windwp/nvim-ts-autotag", enabled = false },
 
   -- ui
-  { "rcarriga/nvim-notify", enabled = false },
+  -- { "rcarriga/nvim-notify", enabled = false },
   { "folke/noice.nvim", enabled = false },
   { "MunifTanjim/nui.nvim", enabled = false },
   { "nvimdev/dashboard-nvim", enabled = false },

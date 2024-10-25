@@ -17,7 +17,6 @@ opt.backup = false
 opt.breakindent = true
 opt.colorcolumn = "100"
 opt.completeopt = "menu,preview"
-opt.conceallevel = 0
 opt.cursorlineopt = "number"
 opt.expandtab = false
 opt.formatoptions = "tcqj"
@@ -43,3 +42,9 @@ vim.filetype.add({
     mdx = "mdx",
   },
 })
+
+-- LSP Server to use for Python.
+-- Set to "basedpyright" to use basedpyright instead of pyright.
+vim.g.lazyvim_python_lsp = "pyright"
+-- Set to "ruff_lsp" to use the old LSP implementation version.
+vim.g.lazyvim_python_ruff = "ruff"
