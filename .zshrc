@@ -64,7 +64,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 
 plugins=(
-  zsh-vi-mode
   nvm
   starship
   fzf
@@ -91,3 +90,10 @@ alias vim="vi"
 alias cat="bat"
 
 source $ZSH/oh-my-zsh.sh
+
+# bun completions
+[ -s "/home/bughowi/.bun/_bun" ] && source "/home/bughowi/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

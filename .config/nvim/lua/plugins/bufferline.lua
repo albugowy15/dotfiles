@@ -13,12 +13,24 @@ return {
     },
     opts = {
       options = {
-      -- stylua: ignore
-      -- close_command = function(n) LazyVim.ui.bufremove(n) end,
-      -- stylua: ignore
-      -- right_mouse_command = function(n) LazyVim.ui.bufremove(n) end,
-      diagnostics = false,
-        always_show_bufferline = true,
+        mode = "buffers",
+        close_command = "bdelete! %d",
+        right_mouse_command = "bdelete! %d",
+        left_mouse_command = "buffer %d",
+        middle_mouse_command = nil,
+        buffer_close_icon = "󰅖",
+        modified_icon = "● ",
+        close_icon = " ",
+        left_trunc_marker = " ",
+        right_trunc_marker = " ",
+        max_name_length = 18,
+        max_prefix_length = 15,
+        truncate_names = true,
+        tab_size = 18,
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        diagnostics_update_in_insert = false,
+        diagnostics_update_on_event = true,
         -- diagnostics_indicator = function(_, _, diag)
         --   local icons = LazyVim.config.icons.diagnostics
         --   local ret = (diag.error and icons.Error .. diag.error .. " " or "")
@@ -33,11 +45,11 @@ return {
             separator = true,
           },
         },
-        ------@param opts bufferline.IconFetcherOpts
-        ---get_element_icon = function(opts)
-        ---  return LazyVim.config.icons.ft[opts.filetype]
-        ---end,
+        get_element_icon = function(opts)
+          return LazyVim.config.icons.ft[opts.filetype]
+        end,
       },
     },
+    config = nil,
   },
 }

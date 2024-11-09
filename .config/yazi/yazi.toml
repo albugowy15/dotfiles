@@ -1,0 +1,5 @@
+[manager]
+show_symlink = true
+
+[preview]
+image_quality = 50
