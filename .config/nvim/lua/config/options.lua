@@ -18,24 +18,28 @@ opt.breakindent = true
 opt.colorcolumn = "100"
 opt.completeopt = "menu,preview"
 opt.cursorlineopt = "number"
-opt.expandtab = false
-opt.formatoptions = "tcqj"
+-- opt.expandtab = false
+-- opt.formatoptions = "tcqj"
 opt.hlsearch = false
 opt.inccommand = "split"
-opt.laststatus = 2
-opt.pumblend = 0
-opt.pumheight = 0
-opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "winsize", "terminal" }
-opt.shiftround = false
-opt.shiftwidth = 4
-opt.sidescrolloff = 0
-opt.scrolloff = 10
+-- opt.laststatus = 2
+-- opt.pumblend = 0
+-- opt.pumheight = 0
+-- opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "winsize", "terminal" }
+-- opt.shiftround = false
+-- opt.shiftwidth = 4
+-- opt.sidescrolloff = 0
+-- opt.scrolloff = 10
 opt.swapfile = false
-opt.tabstop = 4
-opt.updatetime = 250
-opt.undofile = true
-opt.virtualedit = ""
-opt.wildmode = "full"
+-- opt.tabstop = 4
+-- opt.updatetime = 250
+-- opt.undofile = true
+-- opt.virtualedit = ""
+-- opt.wildmode = "full"
+opt.smoothscroll = false
+opt.foldexpr = "0"
+opt.foldmethod = "manual"
+opt.foldtext = "foldtext()"
 
 vim.filetype.add({
   extension = {
@@ -48,3 +52,14 @@ vim.filetype.add({
 vim.g.lazyvim_python_lsp = "pyright"
 -- Set to "ruff_lsp" to use the old LSP implementation version.
 vim.g.lazyvim_python_ruff = "ruff"
+
+-- Enable the option to require a Prettier config file
+-- If no prettier config file is found, the formatter will not be used
+vim.g.lazyvim_prettier_needs_config = false
+
+-- In case you don't want to use `:LazyExtras`,
+-- then you need to set the option below.
+vim.g.lazyvim_picker = "telescope"
+
+-- Set to false to disable auto format
+vim.g.lazyvim_eslint_auto_format = false
