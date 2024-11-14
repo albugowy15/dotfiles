@@ -9,9 +9,6 @@ return {
       inlay_hints = {
         enabled = false,
       },
-      document_highlight = {
-        enabled = false,
-      },
       servers = {
         gopls = {
           settings = {
@@ -37,14 +34,7 @@ return {
               suggest = {
                 completeFunctionCalls = false,
               },
-              inlayHints = {
-                enumMemberValues = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                variableTypes = { enabled = false },
-              },
+              inlayHints = {},
             },
           },
         },
