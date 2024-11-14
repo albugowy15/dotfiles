@@ -1,23 +1,10 @@
 return {
-  -- {
-  --   "scottmckendry/cyberdream.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {
-  --     transparent = false,
-  --     italic_comments = true,
-  --     hide_fillchars = false,
-  --     borderless_telescope = false,
-  --     terminal_colors = true,
-  --     theme = {
-  --       variant = "dark",
-  --     },
-  --   },
-  -- },
-  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
+    init = function()
+      vim.cmd[[colorscheme tokyonight]]
+    end,
     opts = {
       style = "night",
       light_style = "day",
@@ -46,11 +33,4 @@ return {
       end,
       cache = true,
     },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight",
-    },
-  },
-}
+  }
