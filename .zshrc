@@ -64,7 +64,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 
 plugins=(
-  nvm
   starship
   fzf
 )
@@ -76,7 +75,7 @@ export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target,.next"
 
 
 # pnpm
-export PNPM_HOME="/home/bughowi/.local/share/pnpm"
+export PNPM_HOME="/home/albugowy/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -89,11 +88,21 @@ if [[ ":$FPATH:" != *":/home/bughowi/.zsh/completions:"* ]]; then export FPATH="
 alias vim="vi"
 alias cat="bat"
 
-source $ZSH/oh-my-zsh.sh
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # bun completions
-[ -s "/home/bughowi/.bun/_bun" ] && source "/home/bughowi/.bun/_bun"
+[ -s "/home/albugowy/.bun/_bun" ] && source "/home/albugowy/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+. "/home/albugowy/.deno/env"
+
+source $ZSH/oh-my-zsh.sh
+
