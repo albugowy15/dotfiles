@@ -2,6 +2,10 @@ vim.keymap.set("n", "<leader>e", "<cmd>Explore<cr>", { desc = "Open netrw" })
 vim.keymap.set("v", "p", '"_dP', { desc = "Keep last yanked when pasting" })
 vim.keymap.set("n", "<leader>md", "<cmd>delm!<cr>", { desc = "Delete all marks in current buffer" })
 
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- Move to window using the <ctrl> hjkl keys
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })

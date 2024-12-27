@@ -107,6 +107,8 @@ return {
 				enabled = false,
 			},
 		},
+		-- keys = {
+		-- },
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("owivim-lsp-attach", { clear = true }),
@@ -115,18 +117,20 @@ return {
 						mode = mode or "n"
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-					map(
-						"<leader>ws",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
-					)
-					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
+					map("gd", vim.lsp.buf.definition, "Goto Definition")
+					map("gr", vim.lsp.buf.references, "References")
+					map("gI", vim.lsp.buf.implementation, "Goto Implementation")
+					map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
+					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+					map("K", function()
+						return vim.lsp.buf.hover()
+					end, "Hover")
+					map("gK", function()
+						return vim.lsp.buf.signature_help()
+					end, "Signature Help")
+					map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
+					map("<leader>cr", vim.lsp.buf.rename, "Rename")
 				end,
 			})
 
@@ -136,8 +140,11 @@ return {
 			local servers = {
 				clangd = {},
 				pyright = {},
-				-- rust_analyzer = { enabled = false },
-				ts_ls = {},
+				rust_analyzer = { enabled = false },
+				ts_ls = {
+					root_dir = require("lspconfig.util").root_pattern("package.json"),
+					single_file_support = false
+				},
 				tailwindcss = {
 					filetypes_exclude = { "markdown" },
 					filetypes_include = {},
@@ -177,10 +184,7 @@ return {
 							},
 							validate = true,
 							schemaStore = {
-								-- Must disable built-in schemaStore support to use
-								-- schemas from SchemaStore.nvim plugin
 								enable = false,
-								-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
 								url = "",
 							},
 						},
@@ -244,7 +248,6 @@ return {
 					},
 				},
 				prismals = {},
-				rust_analyzer = { enabled = false },
 				svelte = {},
 				taplo = {},
 				volar = {
@@ -254,18 +257,47 @@ return {
 						},
 					},
 				},
+				denols = {
+					filetypes = {
+						"javascript",
+						"typescript",
+					},
+					root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+					settings = {
+						suggest = {
+							imports = {
+								hosts = {
+									["https://deno.land"] = true,
+								},
+							},
+						},
+					},
+				},
 			}
+
+			-- Ensure the servers and tools above are installed
+			--  To check the current status of installed tools and/or manually install
+			--  other tools, you can run
+			--    :Mason
+			--
+			--  You can press `g?` for help in this menu.
 			require("mason").setup()
 
+			-- You can add other tools here that you want Mason to install
+			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"goimports",
 				"gofumpt",
-				"stylua", -- Used to format Lua code
+				"stylua",
+				"prettier",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
+				automatic_installation = true,
+				ensure_installed = {},
+				-- ensure_installed = ensure_installed,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}

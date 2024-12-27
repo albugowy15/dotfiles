@@ -1,9 +1,16 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-vim.g.autoformat = false
 vim.g.have_nerd_font = true
 
-local opt = vim.opt
+-- Detect .editorconfig
+vim.g.editorconfig = true
+-- Netrw basic
+vim.g.netrw_winsize = 30
+vim.g.netrw_keepdir = 0
+vim.g.netrw_localcopydircmd = "cp -r"
+
+vim.opt.hlsearch = false
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -17,7 +24,7 @@ vim.opt.mouse = "a"
 vim.opt.showmode = false
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically. Requires Neovim >= 0.10.0
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -44,7 +51,7 @@ vim.opt.splitbelow = true
 vim.opt.inccommand = "split"
 
 -- Show which line your cursor is on
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -59,7 +66,12 @@ vim.opt.shiftwidth = 2 -- Size of an indent
 vim.opt.smartindent = true -- Insert indents automatically
 vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
+vim.opt.sidescrolloff = 8 -- Columns of context
 
 vim.filetype.add({
 	extension = { mdx = "markdown.mdx" },
 })
+
+vim.g.markdown_fenced_languages = {
+	"ts=typescript",
+}
