@@ -1,64 +1,65 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
-
--- Detect .editorconfig
-vim.g.editorconfig = true
--- Netrw basic
-vim.g.netrw_winsize = 30
-vim.g.netrw_keepdir = 0
-vim.g.netrw_localcopydircmd = "cp -r"
-
--- LazyVim auto format
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 vim.g.autoformat = false
+vim.g.have_nerd_font = true
 
 local opt = vim.opt
-opt.autowrite = false
-opt.backup = false
-opt.breakindent = true
-opt.colorcolumn = "100"
-opt.completeopt = "menu,preview"
-opt.cursorlineopt = "number"
--- opt.expandtab = false
--- opt.formatoptions = "tcqj"
-opt.hlsearch = false
-opt.inccommand = "split"
--- opt.laststatus = 2
--- opt.pumblend = 0
--- opt.pumheight = 0
--- opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "winsize", "terminal" }
--- opt.shiftround = false
--- opt.shiftwidth = 4
--- opt.sidescrolloff = 0
--- opt.scrolloff = 10
-opt.swapfile = false
--- opt.tabstop = 4
--- opt.updatetime = 250
--- opt.undofile = true
--- opt.virtualedit = ""
--- opt.wildmode = "full"
-opt.smoothscroll = false
-opt.foldexpr = "0"
-opt.foldmethod = "manual"
-opt.foldtext = "foldtext()"
+-- Make line numbers default
+vim.opt.number = true
+-- You can also add relative line numbers, to help with jumping.
+--  Experiment for yourself to see if you like it!
+vim.opt.relativenumber = true
+
+-- Enable mouse mode, can be useful for resizing splits for example!
+vim.opt.mouse = "a"
+
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
+-- only set clipboard if not in ssh, to make sure the OSC 52
+-- integration works automatically. Requires Neovim >= 0.10.0
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Keep signcolumn on by default
+vim.opt.signcolumn = "yes"
+
+-- Decrease update time
+vim.opt.updatetime = 250
+
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = "split"
+
+-- Show which line your cursor is on
+vim.opt.cursorline = false
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
+
+vim.opt.colorcolumn = "100"
+vim.opt.cursorlineopt = "number"
+vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.linebreak = true -- Wrap lines at convenient points
+vim.opt.shiftround = true -- Round indent
+vim.opt.shiftwidth = 2 -- Size of an indent
+vim.opt.smartindent = true -- Insert indents automatically
+vim.opt.tabstop = 2 -- Number of spaces tabs count for
+vim.opt.termguicolors = true -- True color support
 
 vim.filetype.add({
-  extension = {
-    mdx = "mdx",
-  },
+	extension = { mdx = "markdown.mdx" },
 })
-
--- LSP Server to use for Python.
--- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "pyright"
--- Set to "ruff_lsp" to use the old LSP implementation version.
-vim.g.lazyvim_python_ruff = "ruff"
-
--- Enable the option to require a Prettier config file
--- If no prettier config file is found, the formatter will not be used
-vim.g.lazyvim_prettier_needs_config = false
-
--- Set to false to disable auto format
-vim.g.lazyvim_eslint_auto_format = false
-
-vim.g.snacks_animate = false
