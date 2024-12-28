@@ -10,106 +10,211 @@ return {
 		},
 	},
 	{ "Bilal2453/luvit-meta", lazy = true },
-	-- LSP for Cargo.toml
 	{
-		"Saecki/crates.nvim",
-		event = { "BufRead Cargo.toml" },
-		opts = {
-			completion = {
-				crates = {
-					enabled = true,
-				},
-			},
-			lsp = {
-				enabled = true,
-				actions = true,
-				completion = true,
-				hover = true,
-			},
+		"williamboman/mason.nvim",
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
 		},
-	},
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^5", -- Recommended
-		lazy = false, -- This plugin is already lazy
+		opts_extend = { "ensure_installed" },
 		opts = {
-			server = {
-				on_attach = function(_, bufnr)
-					vim.keymap.set("n", "<leader>cR", function()
-						vim.cmd.RustLsp("codeAction")
-					end, { desc = "Code Action", buffer = bufnr })
-					vim.keymap.set("n", "<leader>dr", function()
-						vim.cmd.RustLsp("debuggables")
-					end, { desc = "Rust Debuggables", buffer = bufnr })
-				end,
-				default_settings = {
-					-- rust-analyzer language server configuration
-					["rust-analyzer"] = {
-						cargo = {
-							allFeatures = true,
-							loadOutDirsFromCheck = true,
-							buildScripts = {
-								enable = true,
-							},
-						},
-						-- Add clippy lints for Rust if using rust-analyzer
-						checkOnSave = true,
-						-- Enable diagnostics if using rust-analyzer
-						diagnostics = {
-							enable = true,
-						},
-						procMacro = {
-							enable = true,
-							ignored = {
-								["async-trait"] = { "async_trait" },
-								["napi-derive"] = { "napi" },
-								["async-recursion"] = { "async_recursion" },
-							},
-						},
-						files = {
-							excludeDirs = {
-								".direnv",
-								".git",
-								".github",
-								".gitlab",
-								"bin",
-								"node_modules",
-								"target",
-								"venv",
-								".venv",
-							},
-						},
-					},
-				},
+			ensure_installed = {
+				"prettier",
+				"goimports",
+				"gofumpt",
+				"stylua",
+				"prettier",
 			},
+			-- ui = {
+			-- 	icons = {
+			-- 		package_installed = "✓",
+			-- 		package_pending = "➜",
+			-- 		package_uninstalled = "✗",
+			-- 	},
+			-- },
 		},
+		---@param opts MasonSettings | {ensure_installed: string[]}
 		config = function(_, opts)
-			vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+			require("mason").setup(opts)
+			local mr = require("mason-registry")
+			mr:on("package:install:success", function()
+				vim.defer_fn(function()
+					-- trigger FileType event to possibly load this newly installed LSP server
+					require("lazy.core.handler.event").trigger({
+						event = "FileType",
+						buf = vim.api.nvim_get_current_buf(),
+					})
+				end, 100)
+			end)
+
+			mr.refresh(function()
+				for _, tool in ipairs(opts.ensure_installed) do
+					local p = mr.get_package(tool)
+					if not p:is_installed() then
+						p:install()
+					end
+				end
+			end)
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "williamboman/mason.nvim", config = true },
-			"williamboman/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			"mason.nvim",
+			{ "williamboman/mason-lspconfig.nvim", config = function() end },
 			{ "j-hui/fidget.nvim", opts = {} },
-			"hrsh7th/cmp-nvim-lsp",
 		},
-		opts = {
-			diagnostics = {
-				severity_sort = true,
-			},
-			inlay_hints = {
-				enabled = false,
-			},
-			codelens = {
-				enabled = false,
-			},
-		},
-		-- keys = {
-		-- },
-		config = function()
+		opts = function()
+			return {
+				diagnostics = {
+					severity_sort = true,
+				},
+				inlay_hints = {
+					enabled = false,
+				},
+				codelens = {
+					enabled = false,
+				},
+				servers = {
+					clangd = {},
+					pyright = {},
+					rust_analyzer = { enabled = false },
+					ts_ls = {
+						root_dir = require("lspconfig.util").root_pattern("package.json"),
+						single_file_support = false,
+					},
+					tailwindcss = {
+						filetypes_exclude = { "markdown" },
+						filetypes_include = {},
+					},
+					lua_ls = {
+						settings = {
+							Lua = {
+								completion = {
+									callSnippet = "Replace",
+								},
+							},
+						},
+					},
+					yamlls = {
+						capabilities = {
+							textDocument = {
+								foldingRange = {
+									dynamicRegistration = false,
+									lineFoldingOnly = true,
+								},
+							},
+						},
+						-- lazy-load schemastore when needed
+						on_new_config = function(new_config)
+							new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+								"force",
+								new_config.settings.yaml.schemas or {},
+								require("schemastore").yaml.schemas()
+							)
+						end,
+						settings = {
+							redhat = { telemetry = { enabled = false } },
+							yaml = {
+								keyOrdering = false,
+								format = {
+									enable = true,
+								},
+								validate = true,
+								schemaStore = {
+									enable = false,
+									url = "",
+								},
+							},
+						},
+					},
+					eslint = {
+						settings = {
+							workingDirectories = { mode = "auto" },
+							format = false,
+						},
+					},
+					astro = {
+						filetypes = { "astro" },
+						root_dir = require("lspconfig.util").root_pattern(
+							"astro.config.js",
+							"astro.config.mjs",
+							"astro.config.cjs",
+							"astro.config.ts"
+						),
+					},
+					dockerls = {
+						filetypes = { "dockerfile" },
+						root_dir = require("lspconfig.util").root_pattern(
+							"Dockerfile",
+							"docker-compose.yml",
+							"compose.yml",
+							"docker-compose.yaml",
+							"compose.yaml"
+						),
+					},
+					docker_compose_language_service = {},
+					gopls = {
+						settings = {
+							gopls = {
+								gofumpt = true,
+								codelenses = {
+									gc_details = false,
+									generate = true,
+									regenerate_cgo = true,
+									run_govulncheck = true,
+									test = true,
+									tidy = true,
+									upgrade_dependency = true,
+									vendor = true,
+								},
+								hints = {
+									assignVariableTypes = true,
+									compositeLiteralFields = true,
+									compositeLiteralTypes = true,
+									constantValues = true,
+									functionTypeParameters = true,
+									parameterNames = true,
+									rangeVariableTypes = true,
+								},
+								usePlaceholders = false,
+								completeUnimported = true,
+								staticcheck = true,
+								directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+								semanticTokens = false,
+							},
+						},
+					},
+					prismals = {},
+					svelte = {},
+					taplo = {},
+					volar = {
+						init_options = {
+							vue = {
+								hybridMode = true,
+							},
+						},
+					},
+					denols = {
+						filetypes = {
+							"javascript",
+							"typescript",
+						},
+						root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+						settings = {
+							suggest = {
+								imports = {
+									hosts = {
+										["https://deno.land"] = true,
+									},
+								},
+							},
+						},
+					},
+				},
+				setup = {},
+			}
+		end,
+		config = function(_, opts)
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("owivim-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -133,182 +238,69 @@ return {
 					map("<leader>cr", vim.lsp.buf.rename, "Rename")
 				end,
 			})
+			local servers = opts.servers
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				require("blink.cmp").get_lsp_capabilities() or {},
+				opts.capabilities or {}
+			)
+			local function setup(server)
+				local server_opts = vim.tbl_deep_extend("force", {
+					capabilities = vim.deepcopy(capabilities),
+				}, servers[server] or {})
+				if server_opts.enabled == false then
+					return
+				end
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+				if opts.setup[server] then
+					if opts.setup[server](server, server_opts) then
+						return
+					end
+				elseif opts.setup["*"] then
+					if opts.setup["*"](server, server_opts) then
+						return
+					end
+				end
+				require("lspconfig")[server].setup(server_opts)
+			end
 
-			local servers = {
-				clangd = {},
-				pyright = {},
-				rust_analyzer = { enabled = false },
-				ts_ls = {
-					root_dir = require("lspconfig.util").root_pattern("package.json"),
-					single_file_support = false
-				},
-				tailwindcss = {
-					filetypes_exclude = { "markdown" },
-					filetypes_include = {},
-				},
-				lua_ls = {
-					settings = {
-						Lua = {
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				},
-				yamlls = {
-					capabilities = {
-						textDocument = {
-							foldingRange = {
-								dynamicRegistration = false,
-								lineFoldingOnly = true,
-							},
-						},
-					},
-					-- lazy-load schemastore when needed
-					on_new_config = function(new_config)
-						new_config.settings.yaml.schemas = vim.tbl_deep_extend(
-							"force",
-							new_config.settings.yaml.schemas or {},
-							require("schemastore").yaml.schemas()
-						)
-					end,
-					settings = {
-						redhat = { telemetry = { enabled = false } },
-						yaml = {
-							keyOrdering = false,
-							format = {
-								enable = true,
-							},
-							validate = true,
-							schemaStore = {
-								enable = false,
-								url = "",
-							},
-						},
-					},
-				},
-				eslint = {
-					settings = {
-						workingDirectories = { mode = "auto" },
-						format = false,
-					},
-				},
-				astro = {
-					filetypes = { "astro" },
-					root_dir = require("lspconfig.util").root_pattern(
-						"astro.config.js",
-						"astro.config.mjs",
-						"astro.config.cjs",
-						"astro.config.ts"
-					),
-				},
-				dockerls = {
-					filetypes = { "dockerfile" },
-					root_dir = require("lspconfig.util").root_pattern(
-						"Dockerfile",
-						"docker-compose.yml",
-						"compose.yml",
-						"docker-compose.yaml",
-						"compose.yaml"
-					),
-				},
-				docker_compose_language_service = {},
-				gopls = {
-					settings = {
-						gopls = {
-							gofumpt = true,
-							codelenses = {
-								gc_details = false,
-								generate = true,
-								regenerate_cgo = true,
-								run_govulncheck = true,
-								test = true,
-								tidy = true,
-								upgrade_dependency = true,
-								vendor = true,
-							},
-							hints = {
-								assignVariableTypes = true,
-								compositeLiteralFields = true,
-								compositeLiteralTypes = true,
-								constantValues = true,
-								functionTypeParameters = true,
-								parameterNames = true,
-								rangeVariableTypes = true,
-							},
-							usePlaceholders = false,
-							completeUnimported = true,
-							staticcheck = true,
-							directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-							semanticTokens = false,
-						},
-					},
-				},
-				prismals = {},
-				svelte = {},
-				taplo = {},
-				volar = {
-					init_options = {
-						vue = {
-							hybridMode = true,
-						},
-					},
-				},
-				denols = {
-					filetypes = {
-						"javascript",
-						"typescript",
-					},
-					root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
-					settings = {
-						suggest = {
-							imports = {
-								hosts = {
-									["https://deno.land"] = true,
-								},
-							},
-						},
-					},
-				},
-			}
+			local have_mason, mlsp = pcall(require, "mason-lspconfig")
+			local all_mslp_servers = {}
+			if have_mason then
+				all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+			end
+			local ensure_installed = {} ---@type string[]
+			for server, server_opts in pairs(servers) do
+				if server_opts then
+					server_opts = server_opts == true and {} or server_opts
+					if server_opts.enabled ~= false then
+						-- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
+						if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
+							setup(server)
+						else
+							ensure_installed[#ensure_installed + 1] = server
+						end
+					end
+				end
+			end
+			local enopts = require("mason-lspconfig").get_installed_servers()
+			if have_mason then
+				mlsp.setup({
+					automatic_installation = false,
+					ensure_installed = vim.tbl_deep_extend("force", ensure_installed, enopts or {}),
+					handlers = { setup },
+				})
+			end
 
-			-- Ensure the servers and tools above are installed
-			--  To check the current status of installed tools and/or manually install
-			--  other tools, you can run
-			--    :Mason
-			--
-			--  You can press `g?` for help in this menu.
-			require("mason").setup()
-
-			-- You can add other tools here that you want Mason to install
-			-- for you, so that they are available from within Neovim.
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"goimports",
-				"gofumpt",
-				"stylua",
-				"prettier",
-			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-			require("mason-lspconfig").setup({
-				automatic_installation = true,
-				ensure_installed = {},
-				-- ensure_installed = ensure_installed,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
-			})
+			-- local lspconfig = require("lspconfig")
+			-- for server, config in pairs(opts.servers) do
+			-- 	-- passing config.capabilities to blink.cmp merges with the capabilities in your
+			-- 	-- `opts[server].capabilities, if you've defined it
+			-- 	config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+			-- 	lspconfig[server].setup(config)
+			-- end
 		end,
 	},
 }

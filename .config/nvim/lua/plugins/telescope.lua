@@ -9,7 +9,6 @@ return {
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 			},
-			{ "nvim-telescope/telescope-ui-select.nvim" },
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		keys = {
@@ -76,13 +75,5 @@ return {
 				},
 			}
 		end,
-		-- config = function()
-		-- 	-- Enable Telescope extensions if they are installed
-		-- 	-- pcall(require("telescope").load_extension, "fzf")
-		-- 	-- pcall(require("telescope").load_extension, "ui-select")
-		-- 	local actions = require("telescope.actions")
-		-- 	require("telescope").setup({
-		-- 	})
-		-- end,
 	},
 }
