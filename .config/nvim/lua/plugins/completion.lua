@@ -20,7 +20,7 @@ return {
 			ghost_text = { enabled = false },
 		},
 		sources = {
-			default = { "lsp" },
+			default = { "lsp", "path" },
 			cmdline = {},
 		},
 		keymap = {

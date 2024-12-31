@@ -23,7 +23,7 @@ return {
 				"<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>",
 				desc = "Buffers",
 			},
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
+			{ "<leader>ff", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find Files (cwd)" },
 			{ "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
 			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
 			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
