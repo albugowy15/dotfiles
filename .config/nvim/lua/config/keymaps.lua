@@ -1,6 +1,7 @@
 vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", { desc = "Open Oil.nvim" })
 vim.keymap.set("v", "p", '"_dP', { desc = "Keep last yanked when pasting" })
 vim.keymap.set("n", "<leader>md", "<cmd>delm!<cr>", { desc = "Delete all marks in current buffer" })
+vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP server" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`

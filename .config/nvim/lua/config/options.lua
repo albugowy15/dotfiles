@@ -63,10 +63,10 @@ vim.opt.cursorlineopt = "number"
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.linebreak = true -- Wrap lines at convenient points
-vim.opt.shiftround = true -- Round indent
-vim.opt.shiftwidth = 2 -- Size of an indent
+-- vim.opt.shiftround = true -- Round indent
+vim.opt.shiftwidth = 4 -- Size of an indent
 vim.opt.smartindent = true -- Insert indents automatically
-vim.opt.tabstop = 2 -- Number of spaces tabs count for
+vim.opt.tabstop = 4 -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
 vim.opt.sidescrolloff = 8 -- Columns of context
 
