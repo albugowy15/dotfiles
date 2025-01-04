@@ -1,0 +1,20 @@
+theme = GruvboxDarkHard
+background = 0F0F0F
+# foreground = c0caf5
+# selection-background = 283457
+# selection-foreground = c0caf5
+# cursor-color = c0caf5
+# cursor-text = 16181a
+
+
+font-family = "JetBrainsMono Nerd Font"
+font-size = 9.0
+
+mouse-hide-while-typing = true
+window-decoration = false
+
+cursor-style = block
+shell-integration = none
+window-padding-x = 3
+
+copy-on-select = true

@@ -73,6 +73,8 @@ export FZF_CTRL_T_OPTS="
   --preview 'bat -n --color=always {}'"
 export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target,.next"
 
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/albugowy/.zsh/completions:"* ]]; then export FPATH="/home/albugowy/.zsh/completions:$FPATH"; fi
 
 # pnpm
 export PNPM_HOME="/home/albugowy/.local/share/pnpm"
@@ -80,9 +82,6 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-
-# Add deno completions to search path
-if [[ ":$FPATH:" != *":/home/bughowi/.zsh/completions:"* ]]; then export FPATH="/home/bughowi/.zsh/completions:$FPATH"; fi
 
 # alias
 alias vim="vi"
@@ -93,16 +92,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# bun completions
-[ -s "/home/albugowy/.bun/_bun" ] && source "/home/albugowy/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-. "/home/albugowy/.deno/env"
-
 source $ZSH/oh-my-zsh.sh
-
+. "/home/albugowy/.deno/env"

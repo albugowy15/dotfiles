@@ -7,12 +7,6 @@ vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP s
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Move to window using the <ctrl> hjkl keys
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
-
 -- Resize window using <ctrl> arrow keys
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
@@ -41,10 +35,6 @@ vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Sav
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- commenting
-vim.keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-vim.keymap.set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
-
 -- lazy
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
@@ -56,11 +46,11 @@ vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-	severity = severity and vim.diagnostic.severity[severity] or nil
-	return function()
-		go({ severity = severity })
-	end
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
 end
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })

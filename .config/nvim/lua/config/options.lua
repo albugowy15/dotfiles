@@ -11,6 +11,8 @@ vim.g.netrw_winsize = 30
 vim.g.netrw_keepdir = 0
 vim.g.netrw_localcopydircmd = "cp -r"
 
+vim.o.background = "dark" -- or "light" for light mode
+
 vim.opt.hlsearch = false
 
 -- Make line numbers default
@@ -71,9 +73,9 @@ vim.opt.termguicolors = true -- True color support
 vim.opt.sidescrolloff = 8 -- Columns of context
 
 vim.filetype.add({
-	extension = { mdx = "markdown.mdx" },
+  extension = { mdx = "markdown.mdx" },
 })
 
 vim.g.markdown_fenced_languages = {
-	"ts=typescript",
+  "ts=typescript",
 }
