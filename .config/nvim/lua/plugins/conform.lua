@@ -14,6 +14,13 @@ return {
   },
   opts = {
     notify_on_error = false,
+    formatters = {
+      php_cs_fixer = {
+        env = {
+          PHP_CS_FIXER_IGNORE_ENV = true,
+        },
+      },
+    },
     formatters_by_ft = {
       javascript = { "prettier" },
       typescript = { "prettier" },
@@ -33,6 +40,7 @@ return {
       lua = { "stylua" },
       python = { "isort", "black" },
       fish = { "fish_indent" },
+      php = { "php_cs_fixer" },
     },
     format_on_save = {
       async = false,

@@ -74,10 +74,10 @@ export FZF_CTRL_T_OPTS="
 export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target,.next"
 
 # Add deno completions to search path
-if [[ ":$FPATH:" != *":/home/albugowy/.zsh/completions:"* ]]; then export FPATH="/home/albugowy/.zsh/completions:$FPATH"; fi
+if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
 
 # pnpm
-export PNPM_HOME="/home/albugowy/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -93,4 +93,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source $ZSH/oh-my-zsh.sh
-. "/home/albugowy/.deno/env"
