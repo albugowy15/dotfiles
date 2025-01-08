@@ -84,8 +84,9 @@ case ":$PATH:" in
 esac
 
 # alias
-alias vim="vi"
+alias vim="nvim"
 alias cat="bat"
+alias zed="zeditor"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
