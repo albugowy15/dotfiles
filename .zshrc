@@ -87,6 +87,7 @@ esac
 alias vim="nvim"
 alias cat="bat"
 alias zed="zeditor"
+alias pn="pnpm"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
