@@ -14,18 +14,18 @@
     "clock",
     "pulseaudio",
     "power-profiles-daemon",
-    "battery",
+    "battery"
   ],
   "battery": {
     "states": {
       "good": 80,
       "warning": 30,
-      "critical": 20,
+      "critical": 20
     },
     "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   },
   "pulseaudio": {
     "format": "{icon}",
@@ -38,8 +38,8 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", ""],
-    },
+      "default": ["", "", ""]
+    }
   },
   "power-profiles-daemon": {
     "format": "{icon}  {profile}",
@@ -49,17 +49,17 @@
       "default": "",
       "performance": "",
       "balanced": "",
-      "power-saver": "",
-    },
+      "power-saver": ""
+    }
   },
   "tray": {
     "spacing": 10,
-    "icon-size": 13,
+    "icon-size": 13
   },
   "clock": {
-    "format": "{:%d %b %Y - %H:%M}",
+    "format": "{:%d %b %Y - %H:%M}"
   },
   "hyprland/window": {
-    "format": "{initialTitle}",
-  },
+    "format": "{initialTitle}"
+  }
 }
