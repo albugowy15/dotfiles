@@ -60,12 +60,6 @@ vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error"
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- windows
--- vim.keymap.set("n", "<leader>w", "<c-w>", { desc = "Windows" })
--- vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below" })
--- vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right" })
--- vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window" })
-
 -- tabs
 vim.keymap.set("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 vim.keymap.set("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
