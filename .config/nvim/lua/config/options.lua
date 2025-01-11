@@ -71,6 +71,7 @@ vim.opt.smartindent = true -- Insert indents automatically
 vim.opt.tabstop = 4 -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
 vim.opt.sidescrolloff = 8 -- Columns of context
+vim.opt.conceallevel = 1
 
 vim.filetype.add({
   extension = { mdx = "markdown.mdx" },
