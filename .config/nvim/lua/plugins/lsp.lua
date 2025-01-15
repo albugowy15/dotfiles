@@ -23,7 +23,6 @@ return {
         "gofumpt",
         "gomodifytags",
         "impl",
-        "delve",
         "stylua",
         "prettier",
         "shellcheck",
