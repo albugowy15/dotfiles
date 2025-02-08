@@ -2,13 +2,12 @@ return {
   "saghen/blink.cmp",
   -- use a release tag to download pre-built binaries
   version = "*",
-  event = "InsertEnter",
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
     appearance = {
       use_nvim_cmp_as_default = false,
-      nerd_font_variant = "mono",
+      nerd_font_variant = "normal",
     },
     completion = {
       accept = {
@@ -29,4 +28,5 @@ return {
     },
     signature = { enabled = false },
   },
+  opts_extend = { "sources.default" },
 }

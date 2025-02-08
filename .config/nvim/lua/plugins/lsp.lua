@@ -79,18 +79,70 @@ return {
           clangd = {},
           pyright = {},
           rust_analyzer = { enabled = false },
-          ts_ls = {
-            root_dir = util.root_pattern("package.json"),
-            single_file_support = false,
+          -- ts_ls = {
+          --   root_dir = util.root_pattern("package.json"),
+          --   single_file_support = false,
+          -- },
+          vtsls = {
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "javascript.jsx",
+              "typescript",
+              "typescriptreact",
+              "typescript.tsx",
+            },
+            settings = {
+              complete_function_calls = false,
+              vtsls = {
+                enableMoveToFileCodeAction = true,
+                autoUseWorkspaceTsdk = true,
+                -- experimental = {
+                --   maxInlayHintLength = 30,
+                --   completion = {
+                --     enableServerSideFuzzyMatch = true,
+                --   },
+                -- },
+                typescript = {
+                  updateImportsOnFileMove = { enabled = "always" },
+                  suggest = {
+                    completeFunctionCalls = false,
+                  },
+                  inlayHints = {
+                    enumMemberValues = { enabled = false },
+                    functionLikeReturnTypes = { enabled = false },
+                    parameterTypes = { enabled = false },
+                    propertyDeclarationTypes = { enabled = false },
+                    variableTypes = { enabled = false },
+                  },
+                },
+              },
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "@astrojs/ts-plugin",
+                    location = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/@astrojs/language-server",
+                    enableForWorkspaceTypeScriptVersions = true,
+                  },
+                  {
+                    name = "typescript-svelte-plugin",
+                    -- location = LazyVim.get_pkg_path("svelte-language-server", "/node_modules/typescript-svelte-plugin"),
+                    location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
+                    enableForWorkspaceTypeScriptVersions = true,
+                  },
+                },
+              },
+            },
           },
+
           tailwindcss = {
             filetypes_exclude = { "markdown" },
-            root_dir = util.root_pattern(
-              "tailwind.config.js",
-              "tailwind.config.cjs",
-              "tailwind.config.mjs",
-              "tailwind.config.ts"
-            ),
+            -- root_dir = util.root_pattern(
+            --   "tailwind.config.js",
+            --   "tailwind.config.cjs",
+            --   "tailwind.config.mjs",
+            --   "tailwind.config.ts"
+            -- ),
           },
           lua_ls = {
             settings = {
@@ -156,13 +208,6 @@ return {
           },
           svelte = {},
           taplo = {},
-          volar = {
-            init_options = {
-              vue = {
-                hybridMode = true,
-              },
-            },
-          },
           denols = {
             filetypes = {
               "javascript",
@@ -182,6 +227,21 @@ return {
           bashls = {},
           marksman = {},
           intelephense = {},
+          jsonls = {
+            -- lazy-load schemastore when needed
+            on_new_config = function(new_config)
+              new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+              vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+            end,
+            settings = {
+              json = {
+                format = {
+                  enable = true,
+                },
+                validate = { enable = true },
+              },
+            },
+          },
         },
         setup = {},
       }
@@ -210,55 +270,12 @@ return {
           map("<leader>cr", vim.lsp.buf.rename, "Rename")
         end,
       })
-      local servers = opts.servers
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        require("blink.cmp").get_lsp_capabilities() or {},
-        opts.capabilities or {}
-      )
-      local function setup(server)
-        local server_opts = vim.tbl_deep_extend("force", {
-          capabilities = vim.deepcopy(capabilities),
-        }, servers[server] or {})
-        if server_opts.enabled == false then
-          return
-        end
 
-        if opts.setup[server] then
-          if opts.setup[server](server, server_opts) then
-            return
-          end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then
-            return
-          end
-        end
-        require("lspconfig")[server].setup(server_opts)
+      local lspconfig = require("lspconfig")
+      for server, config in pairs(opts.servers) do
+        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
       end
-
-      local mlsp = require("mason-lspconfig")
-      local all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-      local ensure_installed = {} ---@type string[]
-      for server, server_opts in pairs(servers) do
-        if server_opts then
-          server_opts = server_opts == true and {} or server_opts
-          if server_opts.enabled ~= false then
-            -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-            if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-              setup(server)
-            else
-              ensure_installed[#ensure_installed + 1] = server
-            end
-          end
-        end
-      end
-      mlsp.setup({
-        automatic_installation = false,
-        ensure_installed = vim.tbl_deep_extend("force", ensure_installed, mlsp.get_installed_servers() or {}),
-        handlers = { setup },
-      })
     end,
   },
 }
