@@ -84,6 +84,8 @@ return {
           --   single_file_support = false,
           -- },
           vtsls = {
+            single_file_support = false,
+            root_dir = util.root_pattern("package.json"),
             filetypes = {
               "javascript",
               "javascriptreact",
@@ -97,14 +99,19 @@ return {
               vtsls = {
                 enableMoveToFileCodeAction = true,
                 autoUseWorkspaceTsdk = true,
-                -- experimental = {
-                --   maxInlayHintLength = 30,
-                --   completion = {
-                --     enableServerSideFuzzyMatch = true,
-                --   },
-                -- },
+                experimental = {
+                  completion = {
+                    entriesLimit = 20,
+                    enableServerSideFuzzyMatch = true,
+                  },
+                },
                 typescript = {
-                  updateImportsOnFileMove = { enabled = "always" },
+                  preferences = {
+                    includePackageJsonAutoImports = "off",
+                  },
+                  format = {
+                    enable = false,
+                  },
                   suggest = {
                     completeFunctionCalls = false,
                   },
@@ -131,6 +138,22 @@ return {
                     enableForWorkspaceTypeScriptVersions = true,
                   },
                 },
+              },
+            },
+            keys = {
+              {
+                "gD",
+                function()
+                  local params = vim.lsp.util.make_position_params()
+                  return vim.lsp.buf_request(0, "workspace/executeCommand", {
+                    command = "typescript.goToSourceDefinition",
+                    arguments = {
+                      params.textDocument.uri,
+                      params.position,
+                    },
+                  })
+                end,
+                desc = "Goto Source Definition",
               },
             },
           },
