@@ -1,6 +1,7 @@
 return {
   "saghen/blink.cmp",
   -- use a release tag to download pre-built binaries
+  event = { "BufReadPost", "BufNewFile" },
   version = "*",
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -20,7 +21,10 @@ return {
     },
     sources = {
       default = { "lsp", "path" },
-      cmdline = {},
+      -- cmdline = {},
+    },
+    cmdline = {
+      enabled = false,
     },
     keymap = {
       preset = "enter",
@@ -28,5 +32,4 @@ return {
     },
     signature = { enabled = false },
   },
-  opts_extend = { "sources.default" },
 }

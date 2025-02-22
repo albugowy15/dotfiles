@@ -4,7 +4,6 @@ return {
     ft = "lua",
     opts = {
       library = {
-        -- Load luvit types when the `vim.uv` word is found
         { path = "luvit-meta/library", words = { "vim%.uv" } },
       },
     },
@@ -18,7 +17,7 @@ return {
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
-        "prettier",
+        "prettier_d",
         "goimports",
         "gofumpt",
         "gomodifytags",
@@ -27,33 +26,8 @@ return {
         "prettier",
         "shellcheck",
         "hadolint",
-        "phpcs",
-        "php-cs-fixer",
       },
     },
-    ---@param opts MasonSettings | {ensure_installed: string[]}
-    config = function(_, opts)
-      require("mason").setup(opts)
-      local mr = require("mason-registry")
-      mr:on("package:install:success", function()
-        vim.defer_fn(function()
-          -- trigger FileType event to possibly load this newly installed LSP server
-          require("lazy.core.handler.event").trigger({
-            event = "FileType",
-            buf = vim.api.nvim_get_current_buf(),
-          })
-        end, 100)
-      end)
-
-      mr.refresh(function()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end)
-    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -76,13 +50,7 @@ return {
           enabled = false,
         },
         servers = {
-          clangd = {},
-          pyright = {},
           rust_analyzer = { enabled = false },
-          -- ts_ls = {
-          --   root_dir = util.root_pattern("package.json"),
-          --   single_file_support = false,
-          -- },
           vtsls = {
             single_file_support = false,
             root_dir = util.root_pattern("package.json"),
@@ -103,6 +71,11 @@ return {
                   completion = {
                     entriesLimit = 20,
                     enableServerSideFuzzyMatch = true,
+                  },
+                },
+                javascript = {
+                  format = {
+                    enabled = false,
                   },
                 },
                 typescript = {
@@ -140,32 +113,9 @@ return {
                 },
               },
             },
-            keys = {
-              {
-                "gD",
-                function()
-                  local params = vim.lsp.util.make_position_params()
-                  return vim.lsp.buf_request(0, "workspace/executeCommand", {
-                    command = "typescript.goToSourceDefinition",
-                    arguments = {
-                      params.textDocument.uri,
-                      params.position,
-                    },
-                  })
-                end,
-                desc = "Goto Source Definition",
-              },
-            },
           },
-
           tailwindcss = {
             filetypes_exclude = { "markdown" },
-            -- root_dir = util.root_pattern(
-            --   "tailwind.config.js",
-            --   "tailwind.config.cjs",
-            --   "tailwind.config.mjs",
-            --   "tailwind.config.ts"
-            -- ),
           },
           lua_ls = {
             settings = {
@@ -208,12 +158,6 @@ return {
               },
             },
           },
-          eslint = {
-            settings = {
-              -- workingDirectories = { mode = "auto" },
-              format = false,
-            },
-          },
           astro = {
             filetypes = { "astro" },
             root_dir = require("lspconfig.util").root_pattern(
@@ -249,7 +193,6 @@ return {
           },
           bashls = {},
           marksman = {},
-          intelephense = {},
           jsonls = {
             -- lazy-load schemastore when needed
             on_new_config = function(new_config)

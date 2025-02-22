@@ -83,15 +83,20 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# alias
-alias vim="nvim"
-alias cat="bat"
-alias zed="zeditor"
-alias pn="pnpm"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export FLYCTL_INSTALL="$HOME/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# alias
+alias vi="vim"
+alias vim="nvim"
+alias cat="bat"
+alias zed="zeditor"
+alias pn="pnpm"
 
 source $ZSH/oh-my-zsh.sh
