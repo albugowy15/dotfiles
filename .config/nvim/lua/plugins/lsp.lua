@@ -18,12 +18,8 @@ return {
     opts = {
       ensure_installed = {
         "prettier_d",
-        "goimports",
         "gofumpt",
-        "gomodifytags",
-        "impl",
         "stylua",
-        "prettier",
         "shellcheck",
         "hadolint",
       },
@@ -34,7 +30,6 @@ return {
     dependencies = {
       "mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = function() end },
-      { "j-hui/fidget.nvim", opts = {} },
     },
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = function()
@@ -50,7 +45,6 @@ return {
           enabled = false,
         },
         servers = {
-          rust_analyzer = { enabled = false },
           vtsls = {
             single_file_support = false,
             root_dir = util.root_pattern("package.json"),
@@ -106,7 +100,6 @@ return {
                   },
                   {
                     name = "typescript-svelte-plugin",
-                    -- location = LazyVim.get_pkg_path("svelte-language-server", "/node_modules/typescript-svelte-plugin"),
                     location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
                     enableForWorkspaceTypeScriptVersions = true,
                   },
@@ -114,9 +107,9 @@ return {
               },
             },
           },
-          tailwindcss = {
-            filetypes_exclude = { "markdown" },
-          },
+          -- tailwindcss = {
+          --   filetypes_exclude = { "markdown" },
+          -- },
           lua_ls = {
             settings = {
               Lua = {
@@ -170,9 +163,6 @@ return {
           dockerls = {},
           docker_compose_language_service = {},
           gopls = {},
-          prismals = {
-            root_dir = util.root_pattern("package.json"),
-          },
           svelte = {},
           taplo = {},
           denols = {
@@ -192,7 +182,6 @@ return {
             },
           },
           bashls = {},
-          marksman = {},
           jsonls = {
             -- lazy-load schemastore when needed
             on_new_config = function(new_config)

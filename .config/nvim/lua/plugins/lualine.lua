@@ -4,9 +4,12 @@ return {
   opts = {
     options = {
       theme = "tokyonight",
-      component_separators = { left = "", right = "" },
+      -- component_separators = { left = "", right = "" },
       section_separators = "",
       globalstatus = false,
+    },
+    sections = {
+      lualine_c = { { "filename", path = 1 } },
     },
   },
 }

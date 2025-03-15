@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
 vim.g.have_nerd_font = true
 
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
@@ -45,7 +46,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 1000
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -60,18 +61,20 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "120"
 vim.opt.cursorlineopt = "number"
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.linebreak = true -- Wrap lines at convenient points
 -- vim.opt.shiftround = true -- Round indent
-vim.opt.shiftwidth = 4 -- Size of an indent
+vim.opt.shiftwidth = 2 -- Size of an indent
 vim.opt.smartindent = true -- Insert indents automatically
 vim.opt.tabstop = 4 -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
 vim.opt.sidescrolloff = 8 -- Columns of context
-vim.opt.conceallevel = 1
+vim.opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
+
+vim.opt.ruler = true
 
 vim.filetype.add({
   extension = { mdx = "markdown.mdx" },
