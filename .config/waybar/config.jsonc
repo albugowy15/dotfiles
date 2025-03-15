@@ -2,17 +2,17 @@
 {
   "position": "top",
   "mode": "dock",
-  "height": 20,
+  "height": 25,
   "margin-bottom": 0,
   "margin-left": 0,
   "margin-right": 0,
   "spacing": 0,
   "modules-left": ["hyprland/workspaces", "wlr/taskbar"],
-  "modules-center": ["hyprland/window", "custom/empty"],
+  "modules-center": ["hyprland/window" ],
   "modules-right": [
     "tray",
     "clock",
-    "pulseaudio",
+    //"pulseaudio",
     "power-profiles-daemon",
     "battery"
   ],
@@ -27,20 +27,20 @@
     "format-plugged": " {capacity}%",
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   },
-  "pulseaudio": {
-    "format": "{icon}",
-    "format-muted": "",
-    "on-click": "pavucontrol",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""]
-    }
-  },
+  //"pulseaudio": {
+  //  "format": "{icon}",
+  //  "format-muted": "",
+  //  "on-click": "pavucontrol",
+  //  "format-icons": {
+  //    "headphone": "",
+  //    "hands-free": "",
+  //    "headset": "",
+  //    "phone": "",
+  //    "portable": "",
+  //    "car": "",
+  //    "default": ["", "", ""]
+  //  }
+  //},
   "power-profiles-daemon": {
     "format": "{icon}  {profile}",
     "tooltip-format": "Power profile: {profile}",
@@ -54,7 +54,7 @@
   },
   "tray": {
     "spacing": 10,
-    "icon-size": 13
+    "icon-size": 14
   },
   "clock": {
     "format": "{:%d %b %Y - %H:%M}"
