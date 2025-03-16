@@ -19,7 +19,6 @@ plugins=(
   nvm
   rust
   starship
-  tmux
 )
 
 
@@ -46,5 +45,6 @@ alias vim="nvim"
 alias cat="bat"
 alias zed="zeditor"
 alias pn="pnpm"
+alias nvim="~/scripts/nvim-tmux.sh"
 
 source $ZSH/oh-my-zsh.sh
