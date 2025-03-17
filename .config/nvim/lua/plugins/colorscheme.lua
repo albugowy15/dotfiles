@@ -9,7 +9,7 @@ return {
       require("tokyonight").setup({
         style = "night",
         light_style = "day",
-        transparent = false,
+        transparent = true,
         terminal_colors = true,
         styles = {
           sidebars = "dark",
