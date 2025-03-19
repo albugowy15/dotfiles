@@ -12,8 +12,8 @@ return {
         transparent = true,
         terminal_colors = true,
         styles = {
-          sidebars = "dark",
-          floats = "dark",
+          sidebars = "transparent",
+          floats = "transparent",
         },
         lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
         --- You can override specific color groups to use other groups or a hex color
