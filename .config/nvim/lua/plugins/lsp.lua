@@ -47,7 +47,7 @@ return {
         servers = {
           vtsls = {
             single_file_support = false,
-            root_dir = util.root_pattern("package.json"),
+            root_dir = util.root_pattern("tsconfig.json"),
             filetypes = {
               "javascript",
               "javascriptreact",
@@ -107,9 +107,12 @@ return {
               },
             },
           },
-          -- tailwindcss = {
-          --   filetypes_exclude = { "markdown" },
-          -- },
+          eslint = {
+            settings = {
+              workingDirectories = { mode = "auto" },
+              format = false,
+            },
+          },
           lua_ls = {
             settings = {
               Lua = {
@@ -153,12 +156,7 @@ return {
           },
           astro = {
             filetypes = { "astro" },
-            root_dir = require("lspconfig.util").root_pattern(
-              "astro.config.js",
-              "astro.config.mjs",
-              "astro.config.cjs",
-              "astro.config.ts"
-            ),
+            root_dir = util.root_pattern("astro.config.js", "astro.config.mjs", "astro.config.cjs", "astro.config.ts"),
           },
           dockerls = {},
           docker_compose_language_service = {},
@@ -170,7 +168,7 @@ return {
               "javascript",
               "typescript",
             },
-            root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+            root_dir = util.root_pattern("deno.json", "deno.jsonc"),
             settings = {
               suggest = {
                 imports = {

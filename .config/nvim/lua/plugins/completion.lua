@@ -5,6 +5,7 @@ return {
   version = "*",
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
     appearance = {
       nerd_font_variant = "normal",

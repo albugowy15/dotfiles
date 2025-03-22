@@ -7,6 +7,6 @@ return {
     lazy = true,
     version = false, -- last release is way too old
   },
-  { "j-hui/fidget.nvim", opts = {} },
+  { "j-hui/fidget.nvim", event = "VeryLazy", opts = {} },
   { "nvim-tree/nvim-web-devicons" },
 }
