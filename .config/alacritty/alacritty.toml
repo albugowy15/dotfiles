@@ -1,3 +1,6 @@
+[general]
+import = ["~/.config/alacritty/tokyonight_night.toml"]
+
 [window.class]
 general = "Alacritty"
 instance = "Alacritty"
@@ -22,6 +25,3 @@ bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
 
 [mouse]
 hide_when_typing = true
-
-[general]
-import = ["~/.config/alacritty/tokyonight_night.toml"]

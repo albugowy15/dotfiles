@@ -2,16 +2,16 @@
   border: none;
   border-radius: 0;
   font-family: "JetbrainsMono Nerd Font";
-  font-size: 12px;
+  font-size: 11.25px;
   min-height: 0;
 }
 
 window#waybar {
-  background: #080808;
+  background-color: rgba(8, 8, 8, 0.9);
 }
 
 tooltip {
-  background: #080808;
+  background-color: rgba(8, 8, 8, 0.9);
   border: 1px solid #bdbdbd;
 }
 
@@ -27,10 +27,9 @@ tooltip label {
 
 #workspaces button.active {
   color: #323437;
-  background: #b2ceee;
+  background-color: #b2ceee;
 }
 
-#pulseaudio,
 #battery,
 #clock,
 #tray,
@@ -40,10 +39,6 @@ tooltip label {
   padding: 0px 8px;
   margin-left: 5px;
   color: #bdbdbd;
-}
-
-#pulseaudio {
-  padding-right: 13px;
 }
 
 #taskbar {
