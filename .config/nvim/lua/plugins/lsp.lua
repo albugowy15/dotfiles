@@ -44,7 +44,7 @@ return {
         servers = {
           vtsls = {
             single_file_support = false,
-            root_dir = util.root_pattern("tsconfig.json"),
+            root_markers = { "tsconfig.json" },
             filetypes = {
               "javascript",
               "javascriptreact",
@@ -117,6 +117,7 @@ return {
               },
             },
           },
+
           eslint = {
             settings = {
               workingDirectories = { mode = "auto" },
@@ -225,20 +226,35 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("owivim-lsp-attach", { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc, mode)
-            mode = mode or "n"
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          local function client_support_method(client, method, bufnr)
+            return client:supports_method(method, bufnr)
           end
-          map("<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
-          map("gd", vim.lsp.buf.definition, "Goto Definition")
-          map("gr", vim.lsp.buf.references, "References")
-          map("gI", vim.lsp.buf.implementation, "Goto Implementation")
-          map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
-          map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("K", vim.lsp.buf.hover, "Hover")
-          map("gK", vim.lsp.buf.signature_help, "Signature Help")
-          map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
-          map("<leader>cr", vim.lsp.buf.rename, "Rename")
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          if
+            client and client_support_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+          then
+            local higlight_augroup = vim.api.nvim_create_augroup("owivim-lsp-highlight", { clear = false })
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+              buffer = event.buf,
+              group = higlight_augroup,
+              callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+              buffer = event.buf,
+              group = higlight_augroup,
+              callback = vim.lsp.buf.clear_references,
+            })
+
+            vim.api.nvim_create_autocmd("LspDetach", {
+              group = vim.api.nvim_create_augroup("owivim-lsp-detach", { clear = true }),
+              callback = function(event2)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds({ group = "owivim-lsp-attach", buffer = event2.buf })
+              end,
+            })
+          end
         end,
       })
 

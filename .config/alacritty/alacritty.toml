@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/tokyonight_night.toml"]
+import = ["~/.config/alacritty/dracula.toml"]
 
 [window.class]
 general = "Alacritty"

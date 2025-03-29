@@ -7,19 +7,11 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 -- Detect .editorconfig
 vim.g.editorconfig = true
--- Netrw basic
-vim.g.netrw_winsize = 30
-vim.g.netrw_keepdir = 0
-vim.g.netrw_localcopydircmd = "cp -r"
 
 vim.o.background = "dark" -- or "light" for light mode
 
-vim.opt.hlsearch = false
-
 -- Make line numbers default
 vim.opt.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -45,7 +37,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
--- Displays which-key popup sooner
 vim.opt.timeoutlen = 1000
 
 -- Configure how new splits should be opened
@@ -71,8 +62,8 @@ vim.opt.shiftwidth = 2 -- Size of an indent
 vim.opt.smartindent = true -- Insert indents automatically
 vim.opt.tabstop = 4 -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
-vim.opt.sidescrolloff = 8 -- Columns of context
-vim.opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
+-- vim.opt.sidescrolloff = 8 -- Columns of context
+-- vim.opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 
 vim.opt.ruler = true
 
@@ -83,3 +74,8 @@ vim.filetype.add({
 vim.g.markdown_fenced_languages = {
   "ts=typescript",
 }
+
+vim.diagnostic.config({
+  virtual_text = true,
+  update_in_insert = false,
+})

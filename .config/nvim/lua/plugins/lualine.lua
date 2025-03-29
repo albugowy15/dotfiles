@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     options = {
-      theme = "tokyonight",
+      theme = "dracula-nvim",
       -- component_separators = { left = "", right = "" },
       section_separators = "",
       globalstatus = false,
