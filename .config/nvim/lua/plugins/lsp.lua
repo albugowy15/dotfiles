@@ -44,7 +44,7 @@ return {
         servers = {
           vtsls = {
             single_file_support = false,
-            root_dir = util.root_pattern("tsconfig.json"),
+            root_markers = { "tsconfig.json" },
             filetypes = {
               "javascript",
               "javascriptreact",
@@ -153,14 +153,6 @@ return {
                 },
               },
             },
-            -- lazy-load schemastore when needed
-            on_new_config = function(new_config)
-              new_config.settings.yaml.schemas = vim.tbl_deep_extend(
-                "force",
-                new_config.settings.yaml.schemas or {},
-                require("schemastore").yaml.schemas()
-              )
-            end,
             settings = {
               redhat = { telemetry = { enabled = false } },
               yaml = {
@@ -203,11 +195,6 @@ return {
           },
           bashls = {},
           jsonls = {
-            -- lazy-load schemastore when needed
-            on_new_config = function(new_config)
-              new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-              vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-            end,
             settings = {
               json = {
                 format = {
@@ -217,6 +204,64 @@ return {
               },
             },
           },
+          rust_analyzer = {
+            settings = {
+              imports = {
+                granularity = {
+                  group = "module",
+                },
+                prefix = "self",
+              },
+              cargo = {
+                buildScripts = {
+                  enable = true,
+                },
+              },
+              procMacro = {
+                enable = true,
+              },
+            },
+          },
+
+          clangd = {
+            root_dir = function(fname)
+              return require("lspconfig.util").root_pattern(
+                "Makefile",
+                "configure.ac",
+                "configure.in",
+                "config.h.in",
+                "meson.build",
+                "meson_options.txt",
+                "build.ninja"
+              )(fname) or require("lspconfig.util").root_pattern(
+                "compile_commands.json",
+                "compile_flags.txt"
+              )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+            end,
+            -- root_dir = function(fname)
+            --   -- return util.find_git_ancestor(fname)
+            --   return vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
+            -- end,
+            capabilities = {
+              offsetEncoding = { "utf-16" },
+            },
+            cmd = {
+              "clangd",
+              "--background-index",
+              "--clang-tidy",
+              "--header-insertion=iwyu",
+              "--completion-style=detailed",
+              "--function-arg-placeholders",
+              "--fallback-style=llvm",
+            },
+            init_options = {
+              usePlaceholders = true,
+              completeUnimported = true,
+              clangdFileStatus = true,
+            },
+          },
+
+          -- end lsp setup
         },
         setup = {},
       }
@@ -227,18 +272,12 @@ return {
         callback = function(event)
           local map = function(keys, func, desc, mode)
             mode = mode or "n"
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "Lsp: " .. desc })
           end
-          map("<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
-          map("gd", vim.lsp.buf.definition, "Goto Definition")
-          map("gr", vim.lsp.buf.references, "References")
-          map("gI", vim.lsp.buf.implementation, "Goto Implementation")
-          map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
-          map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("K", vim.lsp.buf.hover, "Hover")
-          map("gK", vim.lsp.buf.signature_help, "Signature Help")
-          map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
-          map("<leader>cr", vim.lsp.buf.rename, "Rename")
+
+          map("gd", vim.lsp.buf.definition, "Goto definition")
+          map("gy", vim.lsp.buf.type_definition, "Goto Type definition")
+          map("gD", vim.lsp.buf.declaration, "Goto declaration")
         end,
       })
 

@@ -6,7 +6,11 @@ in_tmux() {
 
 get_session_name() {
     local dirname=${PWD:t}
-    echo ${dirname:gs/[^a-zA-Z0-9_]/_/:l}
+    # First convert to lowercase, then substitute non-alphanumeric characters
+    # Being explicit about quoting the result to prevent unexpected behavior
+    local cleaned_name="${dirname:l}"
+    cleaned_name="${cleaned_name//[^a-zA-Z0-9]/_}"
+    echo "$cleaned_name"
 }
 
 main() {

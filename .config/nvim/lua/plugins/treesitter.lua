@@ -10,6 +10,8 @@ return {
       ensure_installed = {
         "astro",
         "bash",
+        "c",
+        "cpp",
         "csv",
         "css",
         "diff",
