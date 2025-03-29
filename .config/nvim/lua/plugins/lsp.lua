@@ -35,9 +35,6 @@ return {
     opts = function()
       local util = require("lspconfig.util")
       return {
-        diagnostics = {
-          severity_sort = true,
-        },
         inlay_hints = {
           enabled = false,
         },
@@ -63,13 +60,26 @@ return {
                 autoUseWorkspaceTsdk = true,
                 experimental = {
                   completion = {
-                    entriesLimit = 20,
+                    entriesLimit = 10,
                     enableServerSideFuzzyMatch = true,
                   },
                 },
                 javascript = {
+                  preferences = {
+                    includePackageJsonAutoImports = "off",
+                  },
                   format = {
                     enabled = false,
+                  },
+                  suggest = {
+                    completeFunctionCalls = false,
+                  },
+                  inlayHints = {
+                    enumMemberValues = { enabled = false },
+                    functionLikeReturnTypes = { enabled = false },
+                    parameterTypes = { enabled = false },
+                    propertyDeclarationTypes = { enabled = false },
+                    variableTypes = { enabled = false },
                   },
                 },
                 typescript = {
@@ -111,7 +121,19 @@ return {
             settings = {
               workingDirectories = { mode = "auto" },
               format = false,
+              run = "onSave",
+              problems = {
+                shortenToSingleLine = true,
+              },
+              codeActionOnSave = {
+                enable = false,
+                mode = "problems",
+              },
+              quiet = true,
             },
+          },
+          biome = {
+            single_file_support = false,
           },
           lua_ls = {
             settings = {
@@ -189,7 +211,7 @@ return {
             settings = {
               json = {
                 format = {
-                  enable = true,
+                  enable = false,
                 },
                 validate = { enable = true },
               },
@@ -213,12 +235,8 @@ return {
           map("gI", vim.lsp.buf.implementation, "Goto Implementation")
           map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
           map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("K", function()
-            return vim.lsp.buf.hover()
-          end, "Hover")
-          map("gK", function()
-            return vim.lsp.buf.signature_help()
-          end, "Signature Help")
+          map("K", vim.lsp.buf.hover, "Hover")
+          map("gK", vim.lsp.buf.signature_help, "Signature Help")
           map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
           map("<leader>cr", vim.lsp.buf.rename, "Rename")
         end,

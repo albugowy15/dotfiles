@@ -7,11 +7,11 @@
 }
 
 window#waybar {
-  background-color: rgba(8, 8, 8, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 tooltip {
-  background-color: rgba(8, 8, 8, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   border: 1px solid #bdbdbd;
 }
 
@@ -20,7 +20,8 @@ tooltip label {
 }
 
 #workspaces button {
-  background-color: #323437;
+  background-color: rgba(50, 52, 55, 0.6);
+
   color: #bdbdbd;
   padding: 0 2px;
 }
@@ -35,7 +36,7 @@ tooltip label {
 #tray,
 #power-profiles-daemon,
 #user {
-  background-color: #323437;
+  background-color: rgba(50, 52, 55, 0.6);
   padding: 0px 8px;
   margin-left: 5px;
   color: #bdbdbd;
@@ -45,6 +46,6 @@ tooltip label {
   margin-left: 8px;
 }
 #taskbar button {
-  background-color: #323437;
+  background-color: rgba(50, 52, 55, 0.6);
   padding: 0px 8px;
 }
