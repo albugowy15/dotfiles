@@ -1,9 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.have_nerd_font = true
---
--- vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
---
 vim.g.editorconfig = true
 vim.o.background = "dark"
 

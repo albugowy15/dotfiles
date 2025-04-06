@@ -1,14 +1,13 @@
 return {
   {
     "folke/lazydev.nvim",
-    ft = "lua",
+    ft = "lua", -- only load on lua files
     opts = {
       library = {
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
   },
-  { "Bilal2453/luvit-meta", lazy = true },
   {
     "williamboman/mason.nvim",
     dependencies = {
@@ -225,7 +224,7 @@ return {
 
           clangd = {
             root_dir = function(fname)
-              return require("lspconfig.util").root_pattern(
+              return util.root_pattern(
                 "Makefile",
                 "configure.ac",
                 "configure.in",
@@ -233,15 +232,10 @@ return {
                 "meson.build",
                 "meson_options.txt",
                 "build.ninja"
-              )(fname) or require("lspconfig.util").root_pattern(
-                "compile_commands.json",
-                "compile_flags.txt"
-              )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+              )(fname) or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname) or vim.fs.dirname(
+                vim.fs.find(".git", { path = fname, upward = true })[1]
+              )
             end,
-            -- root_dir = function(fname)
-            --   -- return util.find_git_ancestor(fname)
-            --   return vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
-            -- end,
             capabilities = {
               offsetEncoding = { "utf-16" },
             },

@@ -1,7 +1,6 @@
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-  -- use a release tag to download pre-built binaries
   version = "*",
   config = function()
     local lint = require("lint")

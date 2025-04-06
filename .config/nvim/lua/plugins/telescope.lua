@@ -47,8 +47,6 @@ return {
             "%.git",
             "^node_modules/",
           },
-          prompt_prefix = " ",
-          selection_caret = " ",
           mappings = {
             i = {
               ["<C-Down>"] = actions.cycle_history_next,

@@ -2,25 +2,6 @@ return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
-    signs = {
-      add = { text = "▎" },
-      change = { text = "▎" },
-      delete = { text = "" },
-      topdelete = { text = "" },
-      changedelete = { text = "▎" },
-      untracked = { text = "▎" },
-    },
-    signs_staged = {
-      add = { text = "▎" },
-      change = { text = "▎" },
-      delete = { text = "" },
-      topdelete = { text = "" },
-      changedelete = { text = "▎" },
-    },
-    current_line_blame = true,
-    current_line_blame_opts = {
-      delay = 500,
-    },
     on_attach = function(bufnr)
       local gitsigns = require("gitsigns")
 
@@ -73,18 +54,6 @@ return {
       map("n", "<leader>hD", function()
         gitsigns.diffthis("~")
       end)
-
-      map("n", "<leader>hQ", function()
-        gitsigns.setqflist("all")
-      end)
-      map("n", "<leader>hq", gitsigns.setqflist)
-
-      -- Toggles
-      map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-      map("n", "<leader>tw", gitsigns.toggle_word_diff)
-
-      -- Text object
-      map({ "o", "x" }, "ih", gitsigns.select_hunk)
     end,
   },
 }

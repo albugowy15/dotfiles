@@ -4,7 +4,6 @@ return {
   opts = {
     options = {
       theme = "dracula-nvim",
-      -- component_separators = { left = "", right = "" },
       section_separators = "",
       globalstatus = false,
     },
