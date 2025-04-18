@@ -37,6 +37,7 @@ return {
           BlinkCmpLabelDeprecated = { fg = colors.white, bg = nil },
           BlinkCmpLabelMatch = { fg = colors.cyan, bg = nil },
           BlinkCmpKind = { fg = colors.white, bg = nil },
+          TelescopeNormal = { bg = "none" },
         }
       end,
       transparent_bg = true,

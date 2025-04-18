@@ -19,9 +19,10 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.inccommand = "split" -- Preview substitutions live, as you type!
 vim.opt.cursorline = true -- Show which line your cursor is on
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "100"
 vim.opt.cursorlineopt = "number"
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
+vim.opt.hlsearch = false
 
 -- Indentation
 vim.opt.expandtab = true -- Use spaces instead of tabs

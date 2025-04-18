@@ -1,9 +1,9 @@
 return {
   "saghen/blink.cmp",
   version = "*",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
     appearance = {
       nerd_font_variant = "normal",
@@ -35,6 +35,5 @@ return {
       ["<C-y>"] = { "select_and_accept" },
     },
     signature = { enabled = false },
-    fuzzy = { implementation = "rust" },
   },
 }

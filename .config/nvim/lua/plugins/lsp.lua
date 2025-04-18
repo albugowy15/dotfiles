@@ -1,7 +1,7 @@
 return {
   {
     "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
+    ft = "lua",
     opts = {
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
@@ -59,7 +59,7 @@ return {
                 autoUseWorkspaceTsdk = true,
                 experimental = {
                   completion = {
-                    entriesLimit = 10,
+                    entriesLimit = 20,
                     enableServerSideFuzzyMatch = true,
                   },
                 },
@@ -73,13 +73,6 @@ return {
                   suggest = {
                     completeFunctionCalls = false,
                   },
-                  inlayHints = {
-                    enumMemberValues = { enabled = false },
-                    functionLikeReturnTypes = { enabled = false },
-                    parameterTypes = { enabled = false },
-                    propertyDeclarationTypes = { enabled = false },
-                    variableTypes = { enabled = false },
-                  },
                 },
                 typescript = {
                   preferences = {
@@ -90,13 +83,6 @@ return {
                   },
                   suggest = {
                     completeFunctionCalls = false,
-                  },
-                  inlayHints = {
-                    enumMemberValues = { enabled = false },
-                    functionLikeReturnTypes = { enabled = false },
-                    parameterTypes = { enabled = false },
-                    propertyDeclarationTypes = { enabled = false },
-                    variableTypes = { enabled = false },
                   },
                 },
               },
@@ -118,17 +104,17 @@ return {
           },
           eslint = {
             settings = {
-              workingDirectories = { mode = "auto" },
-              format = false,
-              run = "onSave",
-              problems = {
-                shortenToSingleLine = true,
-              },
               codeActionOnSave = {
                 enable = false,
                 mode = "problems",
               },
+              problems = {
+                shortenToSingleLine = true,
+              },
               quiet = true,
+              format = false,
+              run = "onSave",
+              workingDirectories = { mode = "auto" },
             },
           },
           biome = {
@@ -221,7 +207,6 @@ return {
               },
             },
           },
-
           clangd = {
             root_dir = function(fname)
               return util.root_pattern(
@@ -254,7 +239,16 @@ return {
               clangdFileStatus = true,
             },
           },
-
+          tailwindcss = {
+            settings = {
+              tailwindCSS = {
+                validate = false,
+                colorDecorators = false,
+                suggestions = false,
+                codeActions = false,
+              },
+            },
+          },
           -- end lsp setup
         },
         setup = {},
