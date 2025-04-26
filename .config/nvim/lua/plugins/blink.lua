@@ -1,12 +1,13 @@
 return {
   "saghen/blink.cmp",
+  dependencies = { "rafamadriz/friendly-snippets" },
   version = "*",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
     appearance = {
-      nerd_font_variant = "normal",
+      nerd_font_variant = "mono",
     },
     completion = {
       accept = {
@@ -14,11 +15,14 @@ return {
           enabled = false,
         },
       },
+      menu = {
+        border = "rounded",
+      },
       documentation = { auto_show = false },
       ghost_text = { enabled = false },
     },
     sources = {
-      default = { "lazydev", "lsp", "path" },
+      default = { "lazydev", "lsp", "path", "buffer", "snippets" },
       providers = {
         lazydev = {
           name = "LazyDev",
@@ -32,8 +36,7 @@ return {
     },
     keymap = {
       preset = "enter",
-      ["<C-y>"] = { "select_and_accept" },
     },
-    signature = { enabled = false },
   },
+  opts_extend = { "sources.default" },
 }

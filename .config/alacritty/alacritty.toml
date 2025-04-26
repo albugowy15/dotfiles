@@ -1,9 +1,5 @@
 [general]
-import = ["~/.config/alacritty/dracula.toml"]
-
-[window.class]
-general = "Alacritty"
-instance = "Alacritty"
+import = ["~/.config/alacritty/moonfly.toml"]
 
 [window]
 startup_mode = "Maximized"
@@ -11,7 +7,6 @@ dynamic_title = false
 decorations = "transparent"
 decorations_theme_variant = "Dark"
 opacity = 0.9
-padding = { x = 2, y = 1 }
 
 [cursor]
 unfocused_hollow = true

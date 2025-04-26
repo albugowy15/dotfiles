@@ -3,7 +3,6 @@ return {
   event = "VeryLazy",
   opts = {
     options = {
-      theme = "dracula-nvim",
       section_separators = "",
       globalstatus = false,
     },
