@@ -5,13 +5,13 @@ return {
   config = function()
     local lint = require("lint")
     lint.linters_by_ft = {
+      astro = { "eslint" },
       dockerfile = { "hadolint" },
       javascript = { "eslint" },
-      typescript = { "eslint" },
       javascriptreact = { "eslint" },
-      typescriptreact = { "eslint" },
       svelte = { "eslint" },
-      astro = { "eslint" },
+      typescript = { "eslint" },
+      typescriptreact = { "eslint" },
     }
     local lint_augroup = vim.api.nvim_create_augroup("lint", {
       clear = true,

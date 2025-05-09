@@ -1,13 +1,33 @@
-theme = tokyonight_night
-background = 0F0F0F
-# foreground = c0caf5
-# selection-background = 283457
-# selection-foreground = c0caf5
-# cursor-color = c0caf5
-# cursor-text = 16181a
+# moonfly theme for Ghostty
+#
+# Upstream: github.com/bluz71/vim-moonfly-colors
+
+background = #080808
+foreground = #bdbdbd
+selection-background = #b2ceee
+selection-foreground = #080808
+cursor-color = #8e8e8e
+
+palette = 0=#323437
+palette = 1=#ff5d5d
+palette = 2=#8cc85f
+palette = 3=#e3c78a
+palette = 4=#80a0ff
+palette = 5=#cf87e8
+palette = 6=#79dac8
+palette = 7=#c6c6c6
+
+palette = 8=#949494
+palette = 9=#ff5189
+palette = 10=#36c692
+palette = 11=#c6c684
+palette = 12=#74b2ff
+palette = 13=#ae81ff
+palette = 14=#85dc85
+palette = 15=#e4e4e4
 
 
-font-family = "JetBrainsMono Nerd Font"
+font-family = "MesloLGS Nerd Font"
 font-size = 9.0
 
 mouse-hide-while-typing = true
@@ -15,6 +35,7 @@ window-decoration = false
 
 cursor-style = block
 shell-integration = none
-window-padding-x = 3
 
 copy-on-select = true
+
+background-opacity = 0.9

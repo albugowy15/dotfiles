@@ -22,6 +22,8 @@ plugins=(
 )
 
 
+export EDITOR="nvim"
+
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target,.next
   --preview 'bat -n --color=always {}'"

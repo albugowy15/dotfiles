@@ -2,7 +2,7 @@
   border: none;
   border-radius: 0;
   font-family: "JetbrainsMono Nerd Font";
-  font-size: 11.25px;
+  font-size: 10px;
   min-height: 0;
 }
 
@@ -23,7 +23,7 @@ tooltip label {
   background-color: rgba(50, 52, 55, 0.6);
 
   color: #bdbdbd;
-  padding: 0 2px;
+  padding: 0 3px;
 }
 
 #workspaces button.active {
@@ -37,15 +37,15 @@ tooltip label {
 #power-profiles-daemon,
 #user {
   background-color: rgba(50, 52, 55, 0.6);
-  padding: 0px 8px;
-  margin-left: 5px;
+  padding: 0px 7px;
+  margin-left: 3px;
   color: #bdbdbd;
 }
 
 #taskbar {
-  margin-left: 8px;
+  margin-left: 7px;
 }
 #taskbar button {
   background-color: rgba(50, 52, 55, 0.6);
-  padding: 0px 8px;
+  padding: 0px 7px;
 }
