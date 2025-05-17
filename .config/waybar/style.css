@@ -35,6 +35,8 @@ tooltip label {
 #clock,
 #tray,
 #power-profiles-daemon,
+#pulseaudio,
+#network,
 #user {
   background-color: rgba(50, 52, 55, 0.6);
   padding: 0px 7px;
