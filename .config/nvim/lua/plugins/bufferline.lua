@@ -9,16 +9,21 @@ return {
     { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
   },
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {
-    options = {
-      themable = true,
-      numbers = "none",
-      color_icons = true,
-      hover = {
-        enabled = false,
+  config = function()
+    local bufferline = require("bufferline")
+    bufferline.setup({
+      options = {
+        mode = "buffers",
+        style_preset = bufferline.style_preset.minimal,
+        themable = true,
+        numbers = "none",
+        color_icons = true,
+        hover = {
+          enabled = false,
+        },
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
       },
-      diagnostics = "nvim_lsp",
-      always_show_bufferline = false,
-    },
-  },
+    })
+  end,
 }
