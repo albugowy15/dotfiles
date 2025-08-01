@@ -1,15 +1,14 @@
 [general]
-import = ["~/.config/alacritty/moonfly.toml"]
+import = ["~/.config/alacritty/vague.toml"]
 
 [window]
 startup_mode = "Maximized"
 dynamic_title = false
 decorations = "transparent"
 decorations_theme_variant = "Dark"
-opacity = 0.9
 
 [font]
-size = 9
+size = 10
 normal = { family = "MesloLGS Nerd Font", style = "Regular" }
 bold = { family = "MesloLGS Nerd Font", style = "Bold" }
 italic = { family = "MesloLGS Nerd Font", style = "Italic" }

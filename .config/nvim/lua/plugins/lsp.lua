@@ -40,27 +40,27 @@ return {
       },
     },
   },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {
-      single_file_support = false,
-      settings = {
-        publish_diagnostic_on = "insert_leave",
-        expose_as_code_action = "all",
-        complete_function_calls = false,
-        include_completions_with_insert_text = false,
-        code_lens = "off",
-        disable_member_code_lens = true,
-        tsserver_file_preferences = {
-          includePackageJsonAutoImports = "off",
-        },
-        tsserver_format_options = {
-          enable = false,
-        },
-      },
-    },
-  },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {
+  --     single_file_support = false,
+  --     settings = {
+  --       publish_diagnostic_on = "insert_leave",
+  --       expose_as_code_action = "all",
+  --       complete_function_calls = false,
+  --       include_completions_with_insert_text = false,
+  --       code_lens = "off",
+  --       disable_member_code_lens = true,
+  --       tsserver_file_preferences = {
+  --         includePackageJsonAutoImports = "off",
+  --       },
+  --       tsserver_format_options = {
+  --         enable = false,
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -78,54 +78,54 @@ return {
           enabled = false,
         },
         servers = {
-          -- vtsls = {
-          --   single_file_support = false,
-          --   root_markers = { "tsconfig.json" },
-          --   filetypes = {
-          --     "javascript",
-          --     "javascriptreact",
-          --     "javascript.jsx",
-          --     "typescript",
-          --     "typescriptreact",
-          --     "typescript.tsx",
-          --   },
-          --   settings = {
-          --     complete_function_calls = false,
-          --     vtsls = {
-          --       enableMoveToFileCodeAction = true,
-          --       autoUseWorkspaceTsdk = true,
-          --       experimental = {
-          --         completion = {
-          --           entriesLimit = 20,
-          --           enableServerSideFuzzyMatch = true,
-          --         },
-          --       },
-          --       typescript = {
-          --         updateImportsOnFileMove = { enabled = "always" },
-          --         preferences = {
-          --           includePackageJsonAutoImports = "off",
-          --         },
-          --         format = {
-          --           enable = false,
-          --         },
-          --       },
-          --     },
-          --     tsserver = {
-          --       globalPlugins = {
-          --         {
-          --           name = "@astrojs/ts-plugin",
-          --           location = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/@astrojs/language-server",
-          --           enableForWorkspaceTypeScriptVersions = true,
-          --         },
-          --         {
-          --           name = "typescript-svelte-plugin",
-          --           location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
-          --           enableForWorkspaceTypeScriptVersions = true,
-          --         },
-          --       },
-          --     },
-          --   },
-          -- },
+          vtsls = {
+            single_file_support = false,
+            root_markers = { "tsconfig.json" },
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "javascript.jsx",
+              "typescript",
+              "typescriptreact",
+              "typescript.tsx",
+            },
+            settings = {
+              complete_function_calls = false,
+              vtsls = {
+                enableMoveToFileCodeAction = true,
+                autoUseWorkspaceTsdk = true,
+                experimental = {
+                  completion = {
+                    entriesLimit = 20,
+                    enableServerSideFuzzyMatch = true,
+                  },
+                },
+                typescript = {
+                  updateImportsOnFileMove = { enabled = "always" },
+                  preferences = {
+                    includePackageJsonAutoImports = "off",
+                  },
+                  format = {
+                    enable = false,
+                  },
+                },
+              },
+              -- tsserver = {
+              --   globalPlugins = {
+              --     {
+              --       name = "@astrojs/ts-plugin",
+              --       location = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/@astrojs/language-server",
+              --       enableForWorkspaceTypeScriptVersions = true,
+              --     },
+              --     {
+              --       name = "typescript-svelte-plugin",
+              --       location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
+              --       enableForWorkspaceTypeScriptVersions = true,
+              --     },
+              --   },
+              -- },
+            },
+          },
           eslint = {
             settings = {
               codeActionOnSave = {
@@ -295,6 +295,7 @@ return {
                 validate = false,
                 colorDecorators = false,
                 codeActions = false,
+                hover = true,
               },
             },
           },

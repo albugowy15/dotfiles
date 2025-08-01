@@ -4,7 +4,7 @@ vim.g.have_nerd_font = true
 vim.g.editorconfig = true
 vim.o.background = "dark"
 
-vim.opt.conceallevel = 2
+-- vim.opt.conceallevel = 2
 
 vim.opt.termguicolors = true -- True color support
 vim.opt.number = true
@@ -21,7 +21,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.inccommand = "split" -- Preview substitutions live, as you type!
 vim.opt.cursorline = true -- Show which line your cursor is on
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "100"
 vim.opt.cursorlineopt = "number"
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 vim.opt.hlsearch = false
@@ -37,6 +37,9 @@ vim.opt.autoindent = true -- Keep indentation from previouse line
 vim.opt.breakindent = true
 vim.opt.linebreak = true -- Wrap lines at convenient points
 
+vim.opt.scrolloff = 15
+vim.opt.swapfile = false
+
 vim.filetype.add({
   extension = { mdx = "markdown.mdx" },
 })
@@ -44,6 +47,8 @@ vim.filetype.add({
 vim.g.markdown_fenced_languages = {
   "ts=typescript",
 }
+
+vim.opt.winborder = "rounded"
 
 vim.diagnostic.config({
   virtual_text = true,
