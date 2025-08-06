@@ -54,3 +54,6 @@ vim.diagnostic.config({
   virtual_text = true,
   update_in_insert = false,
 })
+
+-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+vim.opt.completeopt = { "menuone", "noselect", "popup" }

@@ -295,7 +295,7 @@ return {
                 validate = false,
                 colorDecorators = false,
                 codeActions = false,
-                hover = true,
+                hovers = true,
               },
             },
           },
