@@ -31,32 +31,23 @@ return {
       },
     },
   },
-  -- {
-  --   "pmizio/typescript-tools.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  --   opts = {
-  --     single_file_support = false,
-  --     settings = {
-  --       publish_diagnostic_on = "insert_leave",
-  --       expose_as_code_action = "all",
-  --       complete_function_calls = false,
-  --       include_completions_with_insert_text = false,
-  --       code_lens = "off",
-  --       disable_member_code_lens = true,
-  --       tsserver_file_preferences = {
-  --         includePackageJsonAutoImports = "off",
-  --       },
-  --       tsserver_format_options = {
-  --         enable = false,
-  --       },
-  --     },
-  --   },
-  -- },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       "mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = function() end },
+      "saghen/blink.cmp",
     },
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = function()
@@ -101,20 +92,20 @@ return {
                   },
                 },
               },
-              -- tsserver = {
-              --   globalPlugins = {
-              --     {
-              --       name = "@astrojs/ts-plugin",
-              --       location = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/@astrojs/language-server",
-              --       enableForWorkspaceTypeScriptVersions = true,
-              --     },
-              --     {
-              --       name = "typescript-svelte-plugin",
-              --       location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
-              --       enableForWorkspaceTypeScriptVersions = true,
-              --     },
-              --   },
-              -- },
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "@astrojs/ts-plugin",
+                    location = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/@astrojs/language-server",
+                    enableForWorkspaceTypeScriptVersions = true,
+                  },
+                  -- {
+                  --   name = "typescript-svelte-plugin",
+                  --   location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
+                  --   enableForWorkspaceTypeScriptVersions = true,
+                  -- },
+                },
+              },
             },
           },
           eslint = {
@@ -296,6 +287,11 @@ return {
       }
     end,
     config = function(_, opts)
+      local lspconfig = require("lspconfig")
+      for server, config in pairs(opts.servers) do
+        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
+      end
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("owivim-lsp-attach", { clear = true }),
         callback = function(event)
@@ -316,12 +312,6 @@ return {
           -- CTRL-S is mapped in Insert mode to |vim.lsp.buf.signature_help()|
         end,
       })
-
-      local lspconfig = require("lspconfig")
-      for server, config in pairs(opts.servers) do
-        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-        lspconfig[server].setup(config)
-      end
     end,
   },
 }

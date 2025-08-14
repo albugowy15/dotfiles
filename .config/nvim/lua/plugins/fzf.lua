@@ -24,7 +24,7 @@ return {
       { "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
       { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
     },
-    opts = function(_, opts)
+    opts = function()
       local fzf = require("fzf-lua")
       local config = fzf.config
       local actions = fzf.actions
@@ -40,20 +40,8 @@ return {
       config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
 
       return {
+        "max-perf",
         fzf_colors = true,
-        defaults = {
-          -- formatter = "path.filename_first",
-          formatter = "path.dirname_first",
-        },
-        winopts = {
-          width = 0.8,
-          height = 0.8,
-          row = 0.5,
-          col = 0.5,
-          preview = {
-            scrollchars = { "┃", "" },
-          },
-        },
         files = {
           cwd_prompt = false,
           actions = {
