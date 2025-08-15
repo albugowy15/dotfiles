@@ -37,10 +37,9 @@ return {
       typescriptreact = { "prettier", stop_after_first = true },
       yaml = { "prettier" },
     },
-    -- format_on_save = {
-    --   async = false,
-    --   lsp_format = "fallback",
-    --   stop_after_first = true,
-    -- },
+    format_after_save = {
+      lsp_format = "fallback",
+      stop_after_first = true,
+    },
   },
 }

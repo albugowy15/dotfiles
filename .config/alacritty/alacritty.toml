@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/vague.toml"]
+import = ["~/.config/alacritty/modus_vivendi.toml"]
 
 [window]
 startup_mode = "Maximized"
