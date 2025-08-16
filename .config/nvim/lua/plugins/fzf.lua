@@ -1,29 +1,7 @@
 return {
   {
     "ibhagwan/fzf-lua",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    keys = {
-      { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
-      { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
-      { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
-      { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files (Root Dir)" },
-      { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
-      { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
-      -- git
-      { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
-      -- search
-      { '<leader>s"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
-      { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
-      { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
-      { "<leader>sC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
-      { "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
-      { "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
-      { "<leader>sg", "<cmd>FzfLua live_grep<cr>", desc = "Grep (Root Dir)" },
-      { "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
-      { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
-    },
+    cmd = "FzfLua",
     opts = function()
       local fzf = require("fzf-lua")
       local config = fzf.config
@@ -57,5 +35,42 @@ return {
         },
       }
     end,
+    init = function()
+      local ui_select = function(_, items)
+        return {
+          winopts = {
+            layout = "vertical",
+            height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 2) + 0.5) + 16,
+            width = 0.5,
+            preview = {
+              layout = "vertical",
+              vertical = "down:15,border-top",
+              hidden = "hidden",
+            },
+          },
+        }
+      end
+      require("fzf-lua").register_ui_select(ui_select)
+    end,
+    keys = {
+      { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
+      { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
+      { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files (Root Dir)" },
+      { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
+      { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
+      -- git
+      { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
+      -- search
+      { '<leader>s"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
+      { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
+      { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      { "<leader>sC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
+      { "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
+      { "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
+      { "<leader>sg", "<cmd>FzfLua live_grep<cr>", desc = "Grep (Root Dir)" },
+      { "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
+      { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
+    },
   },
 }
