@@ -1,53 +1,51 @@
+@define-color foreground #cdcdcd;
+@define-color background #141415;
+
 * {
+  background-color: @background;
+  color: @foreground;
+
   border: none;
   border-radius: 0;
-  font-family: "JetbrainsMono Nerd Font";
-  font-size: 10px;
   min-height: 0;
-}
-
-window#waybar {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-tooltip {
-  background-color: rgba(0, 0, 0, 0.8);
-  border: 1px solid #bdbdbd;
-}
-
-tooltip label {
-  color: #bdbdbd;
+  font-family: JetbrainsMono Nerd Font;
+  font-size: 10px;
 }
 
 #workspaces button {
-  background-color: rgba(50, 52, 55, 0.6);
-
-  color: #bdbdbd;
-  padding: 0 3px;
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
 }
 
-#workspaces button.active {
-  color: #323437;
-  background-color: #b2ceee;
+#workspaces button.empty {
+  opacity: 0.5;
 }
 
-#battery,
-#clock,
 #tray,
-#power-profiles-daemon,
-#pulseaudio,
+#cpu,
+#battery,
 #network,
-#user {
-  background-color: rgba(50, 52, 55, 0.6);
-  padding: 0px 7px;
-  margin-left: 3px;
-  color: #bdbdbd;
+#bluetooth,
+#power-profiles-daemon,
+#pulseaudio {
+  min-width: 12px;
+  margin: 0 7.5px;
 }
 
-#taskbar {
-  margin-left: 7px;
+#custom-expand-icon {
+  margin-right: 7px;
 }
-#taskbar button {
-  background-color: rgba(50, 52, 55, 0.6);
-  padding: 0px 7px;
+
+tooltip {
+  padding: 2px;
+}
+
+#clock {
+  margin-left: 8.75px;
+}
+
+.hidden {
+  opacity: 0;
 }
