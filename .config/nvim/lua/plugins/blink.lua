@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  dependencies = { "giuxtaposition/blink-cmp-copilot" },
+  -- dependencies = { "fang2hou/blink-copilot" },
   version = "*",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   ---@module 'blink.cmp'
@@ -18,11 +18,12 @@ return {
       menu = {
         border = "rounded",
       },
-      documentation = { auto_show = false },
+      -- documentation = { auto_show = false },
       -- ghost_text = { enabled = false },
     },
     sources = {
-      default = { "lazydev", "lsp", "path", "buffer", "copilot" },
+      -- default = { "lazydev", "lsp", "path", "buffer", "copilot" },
+      default = { "lazydev", "lsp", "path", "buffer" },
       providers = {
         lazydev = {
           name = "LazyDev",
@@ -30,12 +31,12 @@ return {
           -- make lazydev completions top priority (see `:h blink.cmp`)
           score_offset = 100,
         },
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 100,
-          async = true,
-        },
+        -- copilot = {
+        --   name = "copilot",
+        --   module = "blink-copilot",
+        --   score_offset = 100,
+        --   async = true,
+        -- },
       },
     },
     cmdline = {

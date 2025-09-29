@@ -1,10 +1,6 @@
--- vtsls currently attaches to Deno projects, which is problematic
--- because Deno has its own built-in TypeScript LSP implementation.
--- Workaround: Manually stop VTSLS in Deno projects using the command:
---   :LspStop vtsls
 vim.lsp.config("vtsls", {
   single_file_support = false,
-  root_markers = { "tsconfig.json" },
+  -- root_markers = { "tsconfig.json" },
   filetypes = {
     "javascript",
     "javascriptreact",
@@ -34,6 +30,20 @@ vim.lsp.config("vtsls", {
         },
       },
     },
+    tsserver = {
+      globalPlugins = {
+        {
+          name = "@astrojs/ts-plugin",
+          location = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/@astrojs/language-server",
+          enableForWorkspaceTypeScriptVersions = true,
+        },
+        -- {
+        --   name = "typescript-svelte-plugin",
+        --   location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
+        --   enableForWorkspaceTypeScriptVersions = true,
+        -- },
+      },
+    },
   },
 })
 
@@ -48,6 +58,10 @@ vim.lsp.config("eslint", {
     run = "onSave",
     workingDirectories = { mode = "auto" },
   },
+})
+
+vim.lsp.config("biome", {
+  single_file_support = false,
 })
 
 vim.lsp.config("lua_ls", {
@@ -83,6 +97,11 @@ vim.lsp.config("yamlls", {
       },
     },
   },
+})
+
+vim.lsp.config("astro", {
+  filetypes = { "astro" },
+  -- root_markers = { "astro.config.js", "astro.config.mjs", "astro.config.cjs", "astro.config.ts" },
 })
 
 vim.lsp.config("gopls", {
@@ -161,35 +180,88 @@ vim.lsp.config("rust_analyzer", {
   },
 })
 
+vim.lsp.config("clangd", {
+  -- root_dir = function(fname)
+  --   return util.root_pattern(
+  --     "Makefile",
+  --     "configure.ac",
+  --     "configure.in",
+  --     "config.h.in",
+  --     "meson.build",
+  --     "meson_options.txt",
+  --     "build.ninja"
+  --   )(fname) or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname) or vim.fs.dirname(
+  --     vim.fs.find(".git", { path = fname, upward = true })[1]
+  --   )
+  -- end,
+  capabilities = {
+    offsetEncoding = { "utf-16" },
+  },
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed",
+    "--function-arg-placeholders",
+    "--fallback-style=llvm",
+  },
+  init_options = {
+    usePlaceholders = true,
+    completeUnimported = true,
+    clangdFileStatus = true,
+  },
+})
+
 vim.lsp.config("tailwindcss", {
   settings = {
     tailwindCSS = {
       classAttributes = { "class", "className", "rootClassName", "class:list" },
-      classFunctions = { "tw", "clsx", "cn" },
+      classFunctions = { "clsx", "cn" },
+      completion = false,
       validate = false,
       colorDecorators = false,
       codeActions = false,
-      hover = true,
+      hovers = true,
     },
   },
 })
 
-vim.lsp.config("astro", {
-  filetypes = { "astro" },
-  root_markers = { "astro.config.js", "astro.config.mjs", "astro.config.cjs", "astro.config.ts" },
+vim.lsp.config("jdtls", {
+  settings = {
+    java = {
+      format = {
+        enabled = true,
+        settings = {
+          url = vim.fn.stdpath("config") .. "/eclipse-java-style.xml",
+          profile = "GoogleStyle",
+        },
+      },
+      saveActions = {
+        organizeImports = true,
+      },
+    },
+  },
 })
 
 vim.lsp.enable({
   "astro",
   "bashls",
   "denols",
+  "docker_compose_language_service",
+  "dockerls",
   "eslint",
   "gopls",
   "jsonls",
+  "lemminx",
   "lua_ls",
   "rust_analyzer",
   "tailwindcss",
   "taplo",
   "vtsls",
   "yamlls",
+  -- "biome",
+  -- "clangd",
+  -- "jdtls",
+  -- "lemminx",
 })

@@ -35,7 +35,9 @@ return {
         "gowork",
         "graphql",
         "html",
+        "http",
         "hyprlang",
+        "java",
         "javascript",
         "jsdoc",
         "json5",
@@ -58,10 +60,9 @@ return {
         "yaml",
       },
       auto_install = false,
-      highlight = {
-        enable = true,
-      },
+      highlight = { enable = true },
       indent = { enable = true },
+      folds = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
