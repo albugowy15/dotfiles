@@ -2,6 +2,16 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("owivim_" .. name, { clear = true })
 end
 
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  callback = function()
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
@@ -10,6 +20,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup("resize_splits"),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
+
+-- Extra keymap for lsp
 vim.api.nvim_create_autocmd("LspAttach", {
   group = augroup("lsp_attach"),
   callback = function(event)
@@ -28,5 +49,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --       -- "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
     --       -- "gO" is mapped in Normal mode to |vim.lsp.buf.document_symbol()|
     --       -- CTRL-S is mapped in Insert mode to |vim.lsp.buf.signature_help()|
+  end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("json_conceal"),
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
   end,
 })

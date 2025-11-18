@@ -1,6 +1,5 @@
 vim.lsp.config("vtsls", {
   single_file_support = false,
-  -- root_markers = { "tsconfig.json" },
   filetypes = {
     "javascript",
     "javascriptreact",
@@ -11,6 +10,18 @@ vim.lsp.config("vtsls", {
   },
   settings = {
     complete_function_calls = false,
+    typescript = {
+      tsserver = {
+        maxTsServerMemory = 6144,
+        useSeparateSyntaxServer = false,
+        useSyntaxServer = "never",
+      },
+      preferences = {
+        includePackageJsonAutoImports = "off",
+        includeCompletionsForModuleExports = false,
+        updateImportsOnPaste = "off",
+      },
+    },
     vtsls = {
       enableMoveToFileCodeAction = true,
       autoUseWorkspaceTsdk = true,
@@ -24,6 +35,8 @@ vim.lsp.config("vtsls", {
         updateImportsOnFileMove = { enabled = "always" },
         preferences = {
           includePackageJsonAutoImports = "off",
+          includeCompletionsForModuleExports = false,
+          updateImportsOnPaste = "off",
         },
         format = {
           enable = false,
@@ -244,11 +257,36 @@ vim.lsp.config("jdtls", {
   },
 })
 
+vim.lsp.config("tsgo", {
+  single_file_support = false,
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+  },
+  settings = {
+    complete_function_calls = false,
+    typescript = {
+      tsserver = {
+        useSeparateSyntaxServer = false,
+        useSyntaxServer = "never",
+      },
+      preferences = {
+        includePackageJsonAutoImports = "off",
+        includeCompletionsForModuleExports = false,
+        updateImportsOnPaste = "off",
+      },
+    },
+  },
+})
+
 vim.lsp.enable({
   "astro",
   "bashls",
   "denols",
-  "docker_compose_language_service",
   "dockerls",
   "eslint",
   "gopls",
@@ -258,7 +296,8 @@ vim.lsp.enable({
   "rust_analyzer",
   "tailwindcss",
   "taplo",
-  "vtsls",
+  "tsgo",
+  -- "vtsls",
   "yamlls",
   -- "biome",
   -- "clangd",

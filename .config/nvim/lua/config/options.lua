@@ -1,10 +1,11 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
 vim.g.have_nerd_font = true
 vim.g.editorconfig = true
--- vim.o.background = "dark"
+vim.o.background = "dark"
 
--- vim.opt.conceallevel = 2
+vim.opt.conceallevel = 2
 
 vim.opt.termguicolors = true -- True color support
 vim.opt.number = true

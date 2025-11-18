@@ -1,9 +1,11 @@
 return {
   "stevearc/oil.nvim",
-  event = "VeryLazy",
   ---@module 'oil'
   ---@type oil.SetupOpts
-  opts = {},
+  opts = {
+    default_file_explorer = true,
+    delete_to_trash = true,
+  },
   dependencies = { "nvim-tree/nvim-web-devicons" },
   lazy = false,
 }

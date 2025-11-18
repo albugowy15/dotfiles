@@ -23,7 +23,7 @@ return {
       disable_news_popup = true,
     },
     lsp = {
-      enable = false,
+      enable = true,
     },
     generate_bug_report = false,
     debug = false,

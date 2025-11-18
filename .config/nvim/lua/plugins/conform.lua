@@ -6,7 +6,11 @@ return {
     {
       "<leader>cf",
       function()
-        require("conform").format({ async = false, lsp_format = "fallback", stop_after_first = true })
+        require("conform").format({
+          lsp_format = "fallback",
+          timeout_ms = 3000,
+          stop_after_first = true,
+        })
       end,
       mode = { "n", "v" },
       desc = "Format Injected Langs",
@@ -36,6 +40,7 @@ return {
       typescript = { "prettier", stop_after_first = true },
       typescriptreact = { "prettier", stop_after_first = true },
       yaml = { "prettier" },
+      sh = { "shfmt" },
     },
     format_after_save = {
       lsp_format = "fallback",

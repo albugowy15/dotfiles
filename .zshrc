@@ -46,3 +46,6 @@ alias pn="pnpm"
 alias cd="z"
 
 source $ZSH/oh-my-zsh.sh
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"

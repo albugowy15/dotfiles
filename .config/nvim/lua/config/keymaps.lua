@@ -30,10 +30,12 @@ vim.keymap.set("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<c
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    vim.diagnostic.jump({
+      count = (next and 1 or -1) * vim.v.count1,
+      severity = severity and vim.diagnostic.severity[severity] or nil,
+      float = true,
+    })
   end
 end
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
@@ -45,7 +47,5 @@ vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning"
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")

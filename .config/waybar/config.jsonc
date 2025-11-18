@@ -130,7 +130,7 @@
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
-    "on-click": "alacritty --class=nmtui -e nmtui",
+    "on-click": "io.elementary.settings",
     "spacing": 1
   },
   "pulseaudio": {
