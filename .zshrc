@@ -49,3 +49,6 @@ source $ZSH/oh-my-zsh.sh
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# go install
+export PATH="$HOME/go/bin:$PATH"

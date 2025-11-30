@@ -258,28 +258,10 @@ vim.lsp.config("jdtls", {
 })
 
 vim.lsp.config("tsgo", {
-  single_file_support = false,
   filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
     "typescript",
     "typescriptreact",
     "typescript.tsx",
-  },
-  settings = {
-    complete_function_calls = false,
-    typescript = {
-      tsserver = {
-        useSeparateSyntaxServer = false,
-        useSyntaxServer = "never",
-      },
-      preferences = {
-        includePackageJsonAutoImports = "off",
-        includeCompletionsForModuleExports = false,
-        updateImportsOnPaste = "off",
-      },
-    },
   },
 })
 
@@ -296,7 +278,7 @@ vim.lsp.enable({
   "rust_analyzer",
   "tailwindcss",
   "taplo",
-  "tsgo",
+  -- "tsgo",
   -- "vtsls",
   "yamlls",
   -- "biome",
