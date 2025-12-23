@@ -66,10 +66,7 @@ vim.lsp.config("eslint", {
       enable = false,
       mode = "problems",
     },
-    quiet = true,
     format = false,
-    run = "onSave",
-    workingDirectories = { mode = "auto" },
   },
 })
 
@@ -279,7 +276,7 @@ vim.lsp.enable({
   "tailwindcss",
   "taplo",
   -- "tsgo",
-  -- "vtsls",
+  "vtsls",
   "yamlls",
   -- "biome",
   -- "clangd",
