@@ -279,7 +279,7 @@ vim.lsp.enable({
   "tailwindcss",
   "taplo",
   -- "tsgo",
-  -- "vtsls",
+  "vtsls",
   "yamlls",
   -- "biome",
   -- "clangd",

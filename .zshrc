@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/yawii/.zsh/completions:"* ]]; then export FPATH="/home/yawii/.zsh/completions:$FPATH"; fi
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -12,11 +14,8 @@ zstyle ':omz:plugins:eza' 'icons' yes
 zstyle ':omz:plugins:eza' 'hyperlink' yes
 
 plugins=(
-  deno
   eza
   fzf
-  nvm
-  rust
   starship
   zoxide
 )
@@ -52,3 +51,11 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 # go install
 export PATH="$HOME/go/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "/home/yawii/.deno/env"
+# Initialize zsh completions (added by deno install script)
+autoload -Uz compinit
+compinit
