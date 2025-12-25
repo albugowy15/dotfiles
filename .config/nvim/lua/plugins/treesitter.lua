@@ -1,14 +1,13 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     version = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    main = "nvim-treesitter.configs",
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+    cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
       { "<bs>", desc = "Decrement Selection", mode = "x" },
@@ -82,5 +81,9 @@ return {
         },
       },
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
   },
 }
