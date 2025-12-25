@@ -18,12 +18,13 @@ return {
         "lua_ls",
         "yamlls",
         "tsgo",
+        "vtsls",
       },
     },
   },
   {
     "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
+    ft = "lua",
     cmd = "LazyDev",
     opts = {
       library = {
