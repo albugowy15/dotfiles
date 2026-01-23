@@ -63,15 +63,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Register treesitter language mappings for filetypes
 vim.treesitter.language.register("tsx", "typescriptreact")
-vim.treesitter.language.register("javascript", "javascriptreact")
+vim.treesitter.language.register("jsx", "javascriptreact")
 
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("treesitter"),
   pattern = {
     "lua",
     "json",
+    "jsonc",
     "yaml",
     "go",
+    "rust",
     "javascript",
     "javascriptreact",
     "typescript",

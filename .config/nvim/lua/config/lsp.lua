@@ -50,11 +50,6 @@ vim.lsp.config("vtsls", {
           location = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/@astrojs/language-server",
           enableForWorkspaceTypeScriptVersions = true,
         },
-        -- {
-        --   name = "typescript-svelte-plugin",
-        --   location = "~/.local/share/nvim/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin",
-        --   enableForWorkspaceTypeScriptVersions = true,
-        -- },
       },
     },
   },
@@ -191,19 +186,22 @@ vim.lsp.config("rust_analyzer", {
 })
 
 vim.lsp.config("clangd", {
-  -- root_dir = function(fname)
-  --   return util.root_pattern(
-  --     "Makefile",
-  --     "configure.ac",
-  --     "configure.in",
-  --     "config.h.in",
-  --     "meson.build",
-  --     "meson_options.txt",
-  --     "build.ninja"
-  --   )(fname) or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname) or vim.fs.dirname(
-  --     vim.fs.find(".git", { path = fname, upward = true })[1]
-  --   )
-  -- end,
+  keys = {
+    { "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+  },
+  root_markers = {
+    "compile_commands.json",
+    "compile_flags.txt",
+    "configure.ac", -- AutoTools
+    "Makefile",
+    "configure.ac",
+    "configure.in",
+    "config.h.in",
+    "meson.build",
+    "meson_options.txt",
+    "build.ninja",
+    ".git",
+  },
   capabilities = {
     offsetEncoding = { "utf-16" },
   },
@@ -279,7 +277,7 @@ vim.lsp.enable({
   "vtsls",
   "yamlls",
   -- "biome",
-  -- "clangd",
+  "clangd",
   -- "jdtls",
   -- "lemminx",
 })

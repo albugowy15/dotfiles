@@ -2,7 +2,7 @@
 import = ["~/.config/alacritty/vague.toml"]
 
 [window]
-decorations = "none"
+# decorations = "none"
 decorations_theme_variant = "Dark"
 padding.x = 5
 padding.y = 5

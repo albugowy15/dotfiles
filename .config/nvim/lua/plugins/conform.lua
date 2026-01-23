@@ -41,6 +41,7 @@ return {
       typescriptreact = { "prettier", stop_after_first = true },
       yaml = { "prettier" },
       sh = { "shfmt" },
+      xml = { "lemminx" },
     },
     format_after_save = {
       lsp_format = "fallback",
