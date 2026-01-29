@@ -42,7 +42,7 @@ vim.opt.scrolloff = 15
 vim.opt.swapfile = false
 
 vim.filetype.add({
-  extension = { mdx = "markdown.mdx" },
+  extension = { mdx = "markdown.mdx", md = "markdown", mjs = "javascript", cjs = "javascript", astro = "astro" },
 })
 
 vim.g.markdown_fenced_languages = {

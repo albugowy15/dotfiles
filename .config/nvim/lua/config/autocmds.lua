@@ -68,9 +68,9 @@ vim.treesitter.language.register("jsx", "javascriptreact")
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("treesitter"),
   pattern = {
+    "astro",
     "lua",
     "json",
-    "jsonc",
     "yaml",
     "go",
     "rust",
@@ -78,6 +78,8 @@ vim.api.nvim_create_autocmd("FileType", {
     "javascriptreact",
     "typescript",
     "typescriptreact",
+    "markdown",
+    "md",
   },
   callback = function()
     -- syntax highlighting, provided by Neovim
