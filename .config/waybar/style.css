@@ -24,21 +24,21 @@
 }
 
 #tray,
-#cpu,
 #battery,
 #network,
 #bluetooth,
 #power-profiles-daemon,
+#custom-power,
 #pulseaudio {
   min-width: 12px;
-  margin: 0 7.5px;
+  margin: 0 10px;
 }
 
 #custom-expand-icon {
   margin-right: 7px;
 }
 
-tooltip {
+.tooltip {
   padding: 2px;
 }
 

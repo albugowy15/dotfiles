@@ -1,6 +1,6 @@
 return {
   "stevearc/conform.nvim",
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  event = { "BufWritePre" },
   cmd = "ConformInfo",
   keys = {
     {
@@ -8,7 +8,7 @@ return {
       function()
         require("conform").format({
           lsp_format = "fallback",
-          timeout_ms = 3000,
+          async = true,
           stop_after_first = true,
         })
       end,
@@ -18,9 +18,14 @@ return {
   },
   opts = {
     notify_on_error = false,
-    stop_after_first = true,
+    default_format_opts = {
+      lsp_format = "fallback",
+    },
     formatters = {
       biome = {
+        require_cwd = true,
+      },
+      prettier = {
         require_cwd = true,
       },
     },
@@ -33,7 +38,8 @@ return {
       html = { "prettier" },
       javascript = { "prettier", stop_after_first = true },
       javascriptreact = { "prettier", stop_after_first = true },
-      json = { "prettier", stop_after_first = true },
+      json = { "prettier" },
+      jsonc = { "prettier" },
       lua = { "stylua" },
       markdown = { "prettier" },
       svelte = { "prettier", stop_after_first = true },
@@ -41,6 +47,7 @@ return {
       typescriptreact = { "prettier", stop_after_first = true },
       yaml = { "prettier" },
       sh = { "shfmt" },
+      xml = { "lemminx" },
     },
     format_after_save = {
       lsp_format = "fallback",

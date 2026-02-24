@@ -21,7 +21,8 @@
     "network",
     "pulseaudio",
     "power-profiles-daemon",
-    "battery"
+    "battery",
+    "custom/power"
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -44,7 +45,8 @@
       "2": [],
       "3": [],
       "4": [],
-      "5": []
+      "5": [],
+      "6": []
     }
   },
   "cpu": {
@@ -53,9 +55,9 @@
     "on-click": "alacritty -e btop"
   },
   "battery": {
-    "format": "{icon} {capacity}% ",
-    "format-discharging": "{icon} {capacity}% ",
-    "format-charging": "{icon} {capacity}% ",
+    "format": "{icon} {capacity}%",
+    "format-discharging": "{icon} {capacity}%",
+    "format-charging": "{icon} {capacity}%",
     "format-plugged": "",
     "format-icons": {
       "charging": [
@@ -95,12 +97,12 @@
   "bluetooth": {
     "format": "",
     "format-disabled": "󰂲",
-    "format-connected": "",
+    "format-connected": "  {device_alias}",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "blueberry"
+    "on-click": "blueman-manager"
   },
   "power-profiles-daemon": {
-    "format": "{icon}",
+    "format": "{icon}  {profile}",
     "tooltip-format": "Power profile: {profile}",
     "tooltip": true,
     "format-icons": {
@@ -123,7 +125,7 @@
       "󰤨"
     ],
     "format": "{icon}",
-    "format-wifi": "{icon}",
+    "format-wifi": "{icon}  {essid}",
     "format-ethernet": "󰀂",
     "format-disconnected": "󰖪",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
@@ -134,9 +136,8 @@
     "spacing": 1
   },
   "pulseaudio": {
-    "format": "{icon}",
+    "format": "{icon}  {volume}%",
     "on-click": "pavucontrol",
-    "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,
     "format-muted": "󰝟",
@@ -166,5 +167,10 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12
+  },
+  "custom/power": {
+    "on-click": "wlogout",
+    "format": "  Power",
+    "tooltip": false
   }
 }
